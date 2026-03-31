@@ -1,6 +1,15 @@
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
   return (
     <main
       style={{
@@ -51,8 +60,14 @@ export default function DashboardPage() {
         >
           Dashboard
         </h1>
+        <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>
+          Logged in as
+        </p>
+        <p style={{ fontSize: "1rem", color: "#a78bfa", fontWeight: 500, marginBottom: "2rem" }}>
+          {user.email}
+        </p>
         <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.65, marginBottom: "2rem" }}>
-          The full dashboard is coming soon. Connect your Google Business Profile, manage reviews, and approve AI replies — all from one place.
+          Coming soon — connect your Google Business Profile, manage reviews, and approve AI replies from one place.
         </p>
         <Link href="/" className="btn-ghost" style={{ display: "inline-flex" }}>
           ← Back to home

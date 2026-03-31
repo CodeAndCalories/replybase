@@ -1,8 +1,33 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+    } else {
+      router.push("/dashboard");
+    }
+  }
+
   return (
     <main
       style={{
@@ -90,10 +115,26 @@ export default function LoginPage() {
             Log in to your ReplyBase account
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          {error && (
+            <div
+              style={{
+                background: "rgba(239,68,68,0.1)",
+                border: "1px solid rgba(239,68,68,0.3)",
+                borderRadius: 8,
+                padding: "0.75rem 1rem",
+                color: "#f87171",
+                fontSize: "0.875rem",
+                marginBottom: "1.25rem",
+              }}
+            >
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {[
-              { label: "Email", type: "email", placeholder: "jane@yourbusiness.com" },
-              { label: "Password", type: "password", placeholder: "Your password" },
+              { label: "Email", type: "email", placeholder: "jane@yourbusiness.com", value: email, onChange: setEmail },
+              { label: "Password", type: "password", placeholder: "Your password", value: password, onChange: setPassword },
             ].map((field) => (
               <div key={field.label}>
                 <label
@@ -110,6 +151,9 @@ export default function LoginPage() {
                 <input
                   type={field.type}
                   placeholder={field.placeholder}
+                  value={field.value}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  required
                   style={{
                     width: "100%",
                     background: "rgba(255,255,255,0.05)",
@@ -119,10 +163,8 @@ export default function LoginPage() {
                     fontSize: "0.9375rem",
                     color: "#f0f0f0",
                     outline: "none",
-                    transition: "border-color 0.2s ease",
+                    boxSizing: "border-box",
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = "rgba(124,106,255,0.5)")}
-                  onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
                 />
               </div>
             ))}
@@ -134,12 +176,14 @@ export default function LoginPage() {
             </div>
 
             <button
+              type="submit"
+              disabled={loading}
               className="btn-primary"
-              style={{ width: "100%", justifyContent: "center" }}
+              style={{ width: "100%", justifyContent: "center", opacity: loading ? 0.6 : 1 }}
             >
-              Log In
+              {loading ? "Logging in..." : "Log In"}
             </button>
-          </div>
+          </form>
 
           <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem", color: "rgba(255,255,255,0.4)" }}>
             Don&apos;t have an account?{" "}

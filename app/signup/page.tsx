@@ -1,8 +1,33 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 
 export default function SignupPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSignup(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.signUp({ email, password });
+
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+    } else {
+      router.push("/dashboard");
+    }
+  }
+
   return (
     <main
       style={{
@@ -90,12 +115,26 @@ export default function SignupPage() {
             14 days free · No credit card required
           </p>
 
-          {/* Placeholder form */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+          {error && (
+            <div
+              style={{
+                background: "rgba(239,68,68,0.1)",
+                border: "1px solid rgba(239,68,68,0.3)",
+                borderRadius: 8,
+                padding: "0.75rem 1rem",
+                color: "#f87171",
+                fontSize: "0.875rem",
+                marginBottom: "1.25rem",
+              }}
+            >
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSignup} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {[
-              { label: "Full name", type: "text", placeholder: "Jane Smith" },
-              { label: "Work email", type: "email", placeholder: "jane@yourbusiness.com" },
-              { label: "Password", type: "password", placeholder: "Min. 8 characters" },
+              { label: "Work email", type: "email", placeholder: "jane@yourbusiness.com", value: email, onChange: setEmail },
+              { label: "Password", type: "password", placeholder: "Min. 8 characters", value: password, onChange: setPassword },
             ].map((field) => (
               <div key={field.label}>
                 <label
@@ -112,6 +151,9 @@ export default function SignupPage() {
                 <input
                   type={field.type}
                   placeholder={field.placeholder}
+                  value={field.value}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  required
                   style={{
                     width: "100%",
                     background: "rgba(255,255,255,0.05)",
@@ -121,21 +163,21 @@ export default function SignupPage() {
                     fontSize: "0.9375rem",
                     color: "#f0f0f0",
                     outline: "none",
-                    transition: "border-color 0.2s ease",
+                    boxSizing: "border-box",
                   }}
-                  onFocus={(e) => (e.target.style.borderColor = "rgba(124,106,255,0.5)")}
-                  onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
                 />
               </div>
             ))}
 
             <button
+              type="submit"
+              disabled={loading}
               className="btn-primary"
-              style={{ width: "100%", justifyContent: "center", marginTop: "0.5rem" }}
+              style={{ width: "100%", justifyContent: "center", marginTop: "0.5rem", opacity: loading ? 0.6 : 1 }}
             >
-              Create Account
+              {loading ? "Creating account..." : "Create Account"}
             </button>
-          </div>
+          </form>
 
           <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem", color: "rgba(255,255,255,0.4)" }}>
             Already have an account?{" "}
