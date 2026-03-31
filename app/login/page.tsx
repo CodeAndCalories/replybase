@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,36 +12,21 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
     setLoading(true);
+    setError("");
 
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-    setLoading(false);
-
     if (error) {
       setError(error.message);
+      setLoading(false);
     } else {
       router.push("/dashboard");
-      router.refresh();
     }
   }
-
-  const inputStyle = {
-    width: "100%",
-    background: "rgba(255,255,255,0.05)",
-    border: "1px solid rgba(255,255,255,0.1)",
-    borderRadius: 8,
-    padding: "0.75rem 1rem",
-    fontSize: "0.9375rem",
-    color: "#f0f0f0",
-    outline: "none",
-    transition: "border-color 0.2s ease",
-    boxSizing: "border-box" as const,
-  };
 
   return (
     <main
@@ -130,54 +115,59 @@ export default function LoginPage() {
             Log in to your ReplyBase account
           </p>
 
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div>
-              <label
-                style={{
-                  display: "block",
-                  fontSize: "0.875rem",
-                  fontWeight: 500,
-                  color: "rgba(255,255,255,0.7)",
-                  marginBottom: "0.375rem",
-                }}
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="jane@yourbusiness.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                style={inputStyle}
-                onFocus={(e) => (e.target.style.borderColor = "rgba(124,106,255,0.5)")}
-                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
-              />
+          {error && (
+            <div
+              style={{
+                background: "rgba(239,68,68,0.1)",
+                border: "1px solid rgba(239,68,68,0.3)",
+                borderRadius: 8,
+                padding: "0.75rem 1rem",
+                color: "#f87171",
+                fontSize: "0.875rem",
+                marginBottom: "1.25rem",
+              }}
+            >
+              {error}
             </div>
+          )}
 
-            <div>
-              <label
-                style={{
-                  display: "block",
-                  fontSize: "0.875rem",
-                  fontWeight: 500,
-                  color: "rgba(255,255,255,0.7)",
-                  marginBottom: "0.375rem",
-                }}
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="Your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                style={inputStyle}
-                onFocus={(e) => (e.target.style.borderColor = "rgba(124,106,255,0.5)")}
-                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
-              />
-            </div>
+          <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {[
+              { label: "Email", type: "email", placeholder: "jane@yourbusiness.com", value: email, onChange: setEmail },
+              { label: "Password", type: "password", placeholder: "Your password", value: password, onChange: setPassword },
+            ].map((field) => (
+              <div key={field.label}>
+                <label
+                  style={{
+                    display: "block",
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    color: "rgba(255,255,255,0.7)",
+                    marginBottom: "0.375rem",
+                  }}
+                >
+                  {field.label}
+                </label>
+                <input
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  value={field.value}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  required
+                  style={{
+                    width: "100%",
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: 8,
+                    padding: "0.75rem 1rem",
+                    fontSize: "0.9375rem",
+                    color: "#f0f0f0",
+                    outline: "none",
+                    boxSizing: "border-box",
+                  }}
+                />
+              </div>
+            ))}
 
             <div style={{ textAlign: "right", marginTop: "-0.5rem" }}>
               <Link href="#" style={{ fontSize: "0.8125rem", color: "#a78bfa", textDecoration: "none" }}>
@@ -185,28 +175,13 @@ export default function LoginPage() {
               </Link>
             </div>
 
-            {error && (
-              <p
-                style={{
-                  fontSize: "0.875rem",
-                  color: "#f87171",
-                  background: "rgba(248,113,113,0.08)",
-                  border: "1px solid rgba(248,113,113,0.2)",
-                  borderRadius: 8,
-                  padding: "0.625rem 0.875rem",
-                }}
-              >
-                {error}
-              </p>
-            )}
-
             <button
               type="submit"
-              className="btn-primary"
               disabled={loading}
-              style={{ width: "100%", justifyContent: "center", opacity: loading ? 0.7 : 1 }}
+              className="btn-primary"
+              style={{ width: "100%", justifyContent: "center", opacity: loading ? 0.6 : 1 }}
             >
-              {loading ? "Logging in…" : "Log In"}
+              {loading ? "Logging in..." : "Log In"}
             </button>
           </form>
 
