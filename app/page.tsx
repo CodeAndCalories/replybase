@@ -431,7 +431,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Pricing card */}
+          {/* Single pricing card */}
           <div style={{ display: "flex", justifyContent: "center" }}>
             <div
               className="shimmer-border"
@@ -446,22 +446,23 @@ export default function Home() {
                 maxWidth: 480,
               }}
             >
-              <div style={{ marginBottom: "1.5rem" }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "0.25rem" }}>
-                  <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "3.5rem", fontWeight: 800 }}>$175</span>
-                  <span style={{ color: "var(--text-muted)", fontSize: "0.9375rem" }}>/mo</span>
+              <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "0.25rem", justifyContent: "center" }}>
+                  <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "4rem", fontWeight: 800 }}>$175</span>
+                  <span style={{ color: "var(--text-muted)", fontSize: "1rem" }}>/mo</span>
                 </div>
-                <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                  Everything included. No limits.
+                <p style={{ fontSize: "0.9375rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
+                  Everything included. Cancel anytime.
                 </p>
               </div>
-              <ul style={{ listStyle: "none", marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+
+              <ul style={{ listStyle: "none", marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "0.875rem" }}>
                 {[
                   "AI reply generation",
-                  "Manual approval workflow",
                   "Auto-send mode",
                   "Brand voice training",
-                  "Multi-location dashboard",
+                  "Multi-location dashboard (up to 3 locations)",
+                  "Unlimited reviews",
                   "Email & push notifications",
                   "Reply analytics",
                   "Priority support",
@@ -476,14 +477,18 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Link href="/signup" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
+
+              <Link href="/signup" className="btn-primary" style={{ width: "100%", justifyContent: "center", fontSize: "1.0625rem", padding: "1rem" }}>
                 Get Started
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
             </div>
           </div>
 
           <p style={{ textAlign: "center", marginTop: "2rem", fontSize: "0.875rem", color: "var(--text-muted)" }}>
-            All plans include a 14-day free trial. No credit card required.
+            14-day free trial included. No credit card required.
           </p>
         </div>
       </section>
