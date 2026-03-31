@@ -50,6 +50,20 @@ replybase/
 └── public/
 ```
 
+## Running the Database Migration
+
+1. Go to your [Supabase project dashboard](https://supabase.com/dashboard)
+2. Navigate to **SQL Editor** in the left sidebar
+3. Click **New query**
+4. Copy the contents of `supabase/migrations/001_initial.sql`
+5. Paste into the editor and click **Run**
+
+This creates the `businesses`, `reviews`, and `subscriptions` tables with RLS policies so users can only access their own data.
+
+> **Supabase Auth setup**: In your Supabase project, go to **Authentication → URL Configuration** and set:
+> - Site URL: `https://your-vercel-domain.vercel.app`
+> - Redirect URLs: `https://your-vercel-domain.vercel.app/**`
+
 ## Roadmap
 
 - [ ] Supabase auth integration

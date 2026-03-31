@@ -1,8 +1,48 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    setLoading(false);
+
+    if (error) {
+      setError(error.message);
+    } else {
+      router.push("/dashboard");
+      router.refresh();
+    }
+  }
+
+  const inputStyle = {
+    width: "100%",
+    background: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.1)",
+    borderRadius: 8,
+    padding: "0.75rem 1rem",
+    fontSize: "0.9375rem",
+    color: "#f0f0f0",
+    outline: "none",
+    transition: "border-color 0.2s ease",
+    boxSizing: "border-box" as const,
+  };
+
   return (
     <main
       style={{
@@ -90,42 +130,54 @@ export default function LoginPage() {
             Log in to your ReplyBase account
           </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {[
-              { label: "Email", type: "email", placeholder: "jane@yourbusiness.com" },
-              { label: "Password", type: "password", placeholder: "Your password" },
-            ].map((field) => (
-              <div key={field.label}>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: "0.875rem",
-                    fontWeight: 500,
-                    color: "rgba(255,255,255,0.7)",
-                    marginBottom: "0.375rem",
-                  }}
-                >
-                  {field.label}
-                </label>
-                <input
-                  type={field.type}
-                  placeholder={field.placeholder}
-                  style={{
-                    width: "100%",
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: 8,
-                    padding: "0.75rem 1rem",
-                    fontSize: "0.9375rem",
-                    color: "#f0f0f0",
-                    outline: "none",
-                    transition: "border-color 0.2s ease",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = "rgba(124,106,255,0.5)")}
-                  onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
-                />
-              </div>
-            ))}
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  color: "rgba(255,255,255,0.7)",
+                  marginBottom: "0.375rem",
+                }}
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder="jane@yourbusiness.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                style={inputStyle}
+                onFocus={(e) => (e.target.style.borderColor = "rgba(124,106,255,0.5)")}
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
+              />
+            </div>
+
+            <div>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  color: "rgba(255,255,255,0.7)",
+                  marginBottom: "0.375rem",
+                }}
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={inputStyle}
+                onFocus={(e) => (e.target.style.borderColor = "rgba(124,106,255,0.5)")}
+                onBlur={(e) => (e.target.style.borderColor = "rgba(255,255,255,0.1)")}
+              />
+            </div>
 
             <div style={{ textAlign: "right", marginTop: "-0.5rem" }}>
               <Link href="#" style={{ fontSize: "0.8125rem", color: "#a78bfa", textDecoration: "none" }}>
@@ -133,13 +185,30 @@ export default function LoginPage() {
               </Link>
             </div>
 
+            {error && (
+              <p
+                style={{
+                  fontSize: "0.875rem",
+                  color: "#f87171",
+                  background: "rgba(248,113,113,0.08)",
+                  border: "1px solid rgba(248,113,113,0.2)",
+                  borderRadius: 8,
+                  padding: "0.625rem 0.875rem",
+                }}
+              >
+                {error}
+              </p>
+            )}
+
             <button
+              type="submit"
               className="btn-primary"
-              style={{ width: "100%", justifyContent: "center" }}
+              disabled={loading}
+              style={{ width: "100%", justifyContent: "center", opacity: loading ? 0.7 : 1 }}
             >
-              Log In
+              {loading ? "Logging in…" : "Log In"}
             </button>
-          </div>
+          </form>
 
           <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem", color: "rgba(255,255,255,0.4)" }}>
             Don&apos;t have an account?{" "}
