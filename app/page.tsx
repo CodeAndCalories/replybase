@@ -431,46 +431,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Pricing cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem", alignItems: "start" }}>
-
-            {/* Starter */}
-            <div className="glass-card" style={{ padding: "2rem" }}>
-              <div style={{ marginBottom: "1.5rem" }}>
-                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.5rem" }}>
-                  Starter
-                </div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "0.25rem" }}>
-                  <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "3rem", fontWeight: 800 }}>$99</span>
-                  <span style={{ color: "var(--text-muted)", fontSize: "0.9375rem" }}>/mo</span>
-                </div>
-                <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                  1 location, up to 100 reviews/mo
-                </p>
-              </div>
-              <ul style={{ listStyle: "none", marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {[
-                  "AI reply generation",
-                  "Manual approval workflow",
-                  "Email notifications",
-                  "Reply analytics",
-                  "Email support",
-                ].map((f) => (
-                  <li key={f} style={{ display: "flex", gap: "0.625rem", fontSize: "0.9375rem", alignItems: "center" }}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <circle cx="8" cy="8" r="7" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-                      <path d="M5 8l2 2 4-4" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span style={{ color: "#ccc" }}>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/signup" className="btn-ghost" style={{ width: "100%", justifyContent: "center" }}>
-                Start Free Trial
-              </Link>
-            </div>
-
-            {/* Pro — featured */}
+          {/* Pricing card */}
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <div
               className="shimmer-border"
               style={{
@@ -478,49 +440,30 @@ export default function Home() {
                 backdropFilter: "blur(20px)",
                 WebkitBackdropFilter: "blur(20px)",
                 borderRadius: "var(--radius)",
-                padding: "2rem",
+                padding: "2.5rem",
                 position: "relative",
+                width: "100%",
+                maxWidth: 480,
               }}
             >
-              {/* Popular badge */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "-14px",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  background: "linear-gradient(135deg, #7c6aff, #00d4aa)",
-                  color: "#fff",
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  padding: "0.25rem 0.875rem",
-                  borderRadius: "100px",
-                  whiteSpace: "nowrap",
-                  letterSpacing: "0.04em",
-                }}
-              >
-                MOST POPULAR
-              </div>
-
               <div style={{ marginBottom: "1.5rem" }}>
-                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.5rem" }}>
-                  Pro
-                </div>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.25rem" }}>
-                  <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "3rem", fontWeight: 800 }}>$175</span>
+                  <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "3.5rem", fontWeight: 800 }}>$175</span>
                   <span style={{ color: "var(--text-muted)", fontSize: "0.9375rem" }}>/mo</span>
                 </div>
                 <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                  Up to 3 locations, unlimited reviews
+                  Everything included. No limits.
                 </p>
               </div>
               <ul style={{ listStyle: "none", marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                 {[
-                  "Everything in Starter",
+                  "AI reply generation",
+                  "Manual approval workflow",
                   "Auto-send mode",
                   "Brand voice training",
                   "Multi-location dashboard",
-                  "Push notifications",
+                  "Email & push notifications",
+                  "Reply analytics",
                   "Priority support",
                   "14-day free trial",
                 ].map((f) => (
@@ -534,43 +477,7 @@ export default function Home() {
                 ))}
               </ul>
               <Link href="/signup" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
-                Start Free Trial
-              </Link>
-            </div>
-
-            {/* Agency */}
-            <div className="glass-card" style={{ padding: "2rem" }}>
-              <div style={{ marginBottom: "1.5rem" }}>
-                <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.5rem" }}>
-                  Agency
-                </div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "0.25rem" }}>
-                  <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "3rem", fontWeight: 800 }}>$399</span>
-                  <span style={{ color: "var(--text-muted)", fontSize: "0.9375rem" }}>/mo</span>
-                </div>
-                <p style={{ fontSize: "0.9rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                  Unlimited locations & clients
-                </p>
-              </div>
-              <ul style={{ listStyle: "none", marginBottom: "2rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {[
-                  "Everything in Pro",
-                  "White-label dashboard",
-                  "Client management",
-                  "API access",
-                  "Dedicated account manager",
-                ].map((f) => (
-                  <li key={f} style={{ display: "flex", gap: "0.625rem", fontSize: "0.9375rem", alignItems: "center" }}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <circle cx="8" cy="8" r="7" stroke="rgba(255,255,255,0.15)" strokeWidth="1" />
-                      <path d="M5 8l2 2 4-4" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span style={{ color: "#ccc" }}>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/signup" className="btn-ghost" style={{ width: "100%", justifyContent: "center" }}>
-                Contact Sales
+                Get Started
               </Link>
             </div>
           </div>
