@@ -2,9 +2,85 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      name: "ReplyBase",
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Web",
+      url: "https://replybase.io",
+      description:
+        "AI-powered review reply management for local businesses. Automate Google review responses, manage reputation, and approve replies with one click.",
+      offers: {
+        "@type": "Offer",
+        price: "175",
+        priceCurrency: "USD",
+        priceValidUntil: "2026-12-31",
+        description: "14-day free trial included",
+      },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        reviewCount: "124",
+      },
+    },
+    {
+      "@type": "Organization",
+      name: "ReplyBase",
+      url: "https://replybase.io",
+      description:
+        "ReplyBase helps local businesses manage and automate their Google review replies using AI.",
+      sameAs: [],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How does ReplyBase generate review replies?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "ReplyBase uses AI to analyze each Google review and generate a professional, on-brand reply. You can approve with one click or enable auto-send.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Does ReplyBase work with Google Business Profile?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. ReplyBase connects directly to your Google Business Profile to monitor new reviews and post approved replies automatically.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I manage multiple business locations?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. ReplyBase supports multi-location management, allowing you to oversee review replies across all your locations from one dashboard.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is there a free trial?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. ReplyBase includes a 14-day free trial with no credit card required.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main style={{ background: "#0a0a0f", minHeight: "100vh", overflowX: "hidden" }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
 
       {/* ─── HERO ─────────────────────────────────────────────────── */}
