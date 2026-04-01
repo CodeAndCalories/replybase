@@ -18,11 +18,26 @@ export default function SignupPage() {
     setError("");
 
     const supabase = createClient();
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
       setError(error.message);
       setLoading(false);
+      return;
+    }
+
+    const userId = data.user?.id;
+
+    const res = await fetch("/api/stripe/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, userId }),
+    });
+
+    const { url } = await res.json();
+
+    if (url) {
+      window.location.href = url;
     } else {
       router.push("/dashboard");
     }
@@ -175,7 +190,7 @@ export default function SignupPage() {
               className="btn-primary"
               style={{ width: "100%", justifyContent: "center", marginTop: "0.5rem", opacity: loading ? 0.6 : 1 }}
             >
-              {loading ? "Creating account..." : "Create Account"}
+              {loading ? "Redirecting to checkout..." : "Create Account"}
             </button>
           </form>
 
