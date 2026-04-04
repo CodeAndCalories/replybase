@@ -76,13 +76,31 @@ export default function ReviewsPage() {
   const [approved, setApproved] = useState<Record<number, boolean>>({});
   const [showReply, setShowReply] = useState<Record<number, boolean>>({});
 
-  const handleGenerate = (id: number) => {
+  const handleGenerate = async (id: number) => {
+    const review = mockReviews.find((r) => r.id === id);
+    if (!review) return;
+
     setGenerating((prev) => ({ ...prev, [id]: true }));
     setShowReply((prev) => ({ ...prev, [id]: true }));
-    setTimeout(() => {
+
+    try {
+      const res = await fetch("/api/generate-reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reviewerName: review.name,
+          rating: review.rating,
+          reviewText: review.text,
+          businessName: review.business,
+        }),
+      });
+      const data = await res.json();
+      setReplyDrafts((prev) => ({ ...prev, [id]: data.reply ?? "" }));
+    } catch {
       setReplyDrafts((prev) => ({ ...prev, [id]: mockReplies[id] ?? "" }));
+    } finally {
       setGenerating((prev) => ({ ...prev, [id]: false }));
-    }, 1200);
+    }
   };
 
   const handleApprove = (id: number) => {

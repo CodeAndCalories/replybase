@@ -157,7 +157,7 @@ export default function BusinessesPage() {
           </p>
         </div>
         <a
-          href="#"
+          href="/api/auth/google"
           style={{
             display: "inline-flex",
             alignItems: "center",
