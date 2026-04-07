@@ -1,11 +1,25 @@
-## Supabase Email Confirmation Redirect
+## Supabase Auth Configuration
 
-In the Supabase dashboard:
-1. Go to Authentication → Email Templates → Confirm signup
-2. Find the confirmation URL in the template — it will contain {{ .ConfirmationURL }}
-3. Change the button/link href to: {{ .ConfirmationURL }}&redirect_to=https://replybasehq.com/welcome
-4. Save the template
+### URL Configuration
 
-Also go to Authentication → URL Configuration and confirm:
+Go to Authentication → URL Configuration and set:
 - Site URL: https://replybasehq.com
 - Redirect URLs includes: https://replybasehq.com/**
+
+### Email Confirmation Template
+
+Go to Authentication → Email Templates → Confirm signup.
+
+The confirmation button/link href should be left as:
+
+    {{ .ConfirmationURL }}
+
+Supabase will automatically redirect to the callback route. Make sure the following is set in URL Configuration → Redirect URLs:
+
+    https://replybasehq.com/auth/callback?next=/welcome
+
+The auth callback route at /auth/callback will:
+1. Exchange the confirmation code for a session
+2. Redirect the user to /welcome, which launches Stripe checkout
+
+Do NOT append &redirect_to manually — Supabase handles the redirect via the callback route instead.
