@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
 import { getAuthUrl } from "@/lib/google";
+import { createClient } from "@/lib/supabase/server";
 
 export async function GET() {
-  const authUrl = getAuthUrl();
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.redirect(new URL("/login", process.env.NEXT_PUBLIC_APP_URL!));
+  }
+
+  const authUrl = getAuthUrl(user.id);
   return NextResponse.redirect(authUrl);
 }

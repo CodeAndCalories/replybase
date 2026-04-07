@@ -8,12 +8,13 @@ export function getOAuthClient() {
   );
 }
 
-export function getAuthUrl(): string {
+export function getAuthUrl(userId: string): string {
   const client = getOAuthClient();
   return client.generateAuthUrl({
     access_type: "offline",
     prompt: "consent",
     scope: ["https://www.googleapis.com/auth/business.manage"],
+    state: userId,
   });
 }
 

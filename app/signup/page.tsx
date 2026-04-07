@@ -34,6 +34,12 @@ export default function SignupPage() {
       body: JSON.stringify({ email, userId }),
     });
 
+    if (!res.ok) {
+      setError("Failed to start checkout. Please try again.");
+      setLoading(false);
+      return;
+    }
+
     const { url } = await res.json();
 
     if (url) {

@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         process.env.SUPABASE_SERVICE_ROLE_KEY!
       );
 
-      await supabase.from("subscriptions").upsert(
+      const { error: upsertError } = await supabase.from("subscriptions").upsert(
         {
           user_id: userId,
           stripe_customer_id: session.customer as string,
@@ -39,6 +39,11 @@ export async function POST(request: Request) {
         },
         { onConflict: "user_id" }
       );
+
+      if (upsertError) {
+        console.error("Supabase upsert error:", upsertError);
+        return NextResponse.json({ error: "Database error" }, { status: 500 });
+      }
     }
   }
 

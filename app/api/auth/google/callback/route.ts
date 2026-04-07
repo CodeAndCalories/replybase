@@ -6,8 +6,9 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
   const error = searchParams.get("error");
+  const userId = searchParams.get("state");
 
-  if (error || !code) {
+  if (error || !code || !userId) {
     return NextResponse.redirect(new URL("/dashboard/businesses?error=oauth_denied", request.url));
   }
 
@@ -22,7 +23,10 @@ export async function GET(request: NextRequest) {
 
       await supabase
         .from("businesses")
-        .upsert({ google_refresh_token: tokens.refresh_token }, { onConflict: "google_refresh_token" });
+        .upsert(
+          { user_id: userId, google_refresh_token: tokens.refresh_token },
+          { onConflict: "user_id" }
+        );
     }
   } catch (err) {
     console.error("Google OAuth callback error:", err);
