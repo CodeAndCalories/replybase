@@ -25,7 +25,7 @@ export default function SignupPage() {
       email,
       password,
       options: {
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback?next=/welcome`,
+        emailRedirectTo: 'https://www.replybasehq.com/auth/callback?next=/welcome',
       },
     });
 
