@@ -1,16 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 
 export default function SignupPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
@@ -18,7 +17,7 @@ export default function SignupPage() {
     setError("");
 
     const supabase = createClient();
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const { error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
       setError(error.message);
@@ -26,27 +25,8 @@ export default function SignupPage() {
       return;
     }
 
-    const userId = data.user?.id;
-
-    const res = await fetch("/api/stripe/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, userId }),
-    });
-
-    if (!res.ok) {
-      setError("Failed to start checkout. Please try again.");
-      setLoading(false);
-      return;
-    }
-
-    const { url } = await res.json();
-
-    if (url) {
-      window.location.href = url;
-    } else {
-      router.push("/dashboard");
-    }
+    setSuccess(true);
+    setLoading(false);
   }
 
   return (
@@ -121,6 +101,17 @@ export default function SignupPage() {
             padding: "2.5rem",
           }}
         >
+          {success ? (
+            <div style={{ textAlign: "center", padding: "1rem 0" }}>
+              <p style={{ fontSize: "1rem", fontWeight: 600, color: "#00d4aa", marginBottom: "0.5rem" }}>
+                Account created!
+              </p>
+              <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>
+                Check your email to confirm your account before logging in.
+              </p>
+            </div>
+          ) : (
+          <>
           <h1
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
@@ -206,6 +197,8 @@ export default function SignupPage() {
               Log in
             </Link>
           </p>
+          </>
+          )}
         </div>
       </div>
     </main>
