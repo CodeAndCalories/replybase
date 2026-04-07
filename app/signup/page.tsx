@@ -127,10 +127,10 @@ export default function SignupPage() {
               marginBottom: "0.5rem",
             }}
           >
-            Start your free trial
+            Create your account
           </h1>
           <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.5)", marginBottom: "2rem" }}>
-            14 days free · No credit card required
+            Start managing your Google reviews with AI
           </p>
 
           {error && (
@@ -193,7 +193,7 @@ export default function SignupPage() {
               className="btn-primary"
               style={{ width: "100%", justifyContent: "center", marginTop: "0.5rem", opacity: loading ? 0.6 : 1 }}
             >
-              {loading ? "Redirecting to checkout..." : "Create Account"}
+              {loading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
