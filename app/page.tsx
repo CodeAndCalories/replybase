@@ -10,7 +10,7 @@ const jsonLd = {
       name: "ReplyBase",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
-      url: "https://replybase.io",
+      url: "https://replybasehq.com",
       description:
         "AI-powered review reply management for local businesses. Automate Google review responses, manage reputation, and approve replies with one click.",
       offers: {
@@ -29,7 +29,7 @@ const jsonLd = {
     {
       "@type": "Organization",
       name: "ReplyBase",
-      url: "https://replybase.io",
+      url: "https://replybasehq.com",
       description:
         "ReplyBase helps local businesses manage and automate their Google review replies using AI.",
       sameAs: [],
@@ -191,7 +191,6 @@ export default function Home() {
           >
             {[
               { icon: "★★★★★", text: "4.9 avg reply rating" },
-              { icon: "✓", text: "No credit card required" },
               { icon: "✓", text: "Setup in 5 minutes" },
             ].map((item) => (
               <div
@@ -564,7 +563,7 @@ export default function Home() {
           </div>
 
           <p style={{ textAlign: "center", marginTop: "2rem", fontSize: "0.875rem", color: "var(--text-muted)" }}>
-            14-day free trial included. No credit card required.
+            14-day free trial included.
           </p>
         </div>
       </section>
@@ -733,7 +732,7 @@ function HeroMockup() {
         <div style={{ width: 12, height: 12, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
         <div style={{ width: 12, height: 12, borderRadius: "50%", background: "rgba(255,255,255,0.06)" }} />
         <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.05)", marginLeft: "0.5rem" }} />
-        <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>replybase.io/dashboard</span>
+        <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)", fontFamily: "monospace" }}>replybasehq.com/dashboard</span>
       </div>
 
       {/* New review notification */}
