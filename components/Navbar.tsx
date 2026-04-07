@@ -122,7 +122,7 @@ export default function Navbar() {
           className="btn-primary"
           style={{ padding: "0.5625rem 1.25rem", fontSize: "0.9rem" }}
         >
-          Start Free Trial
+          Get Started
         </Link>
 
         {/* Mobile hamburger */}
@@ -188,7 +188,7 @@ export default function Navbar() {
             Log in
           </Link>
           <Link href="/signup" className="btn-primary" style={{ textAlign: "center" }}>
-            Start Free Trial
+            Get Started
           </Link>
         </div>
       )}

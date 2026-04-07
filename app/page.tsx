@@ -171,7 +171,7 @@ export default function Home() {
           {/* CTA */}
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/signup" className="btn-primary" style={{ fontSize: "1.0625rem", padding: "1rem 2.25rem" }}>
-              Start Free Trial
+              Get Started
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -693,7 +693,7 @@ export default function Home() {
                 Join hundreds of businesses that never let a review go unanswered. Start your free trial — no credit card needed.
               </p>
               <Link href="/signup" className="btn-primary" style={{ fontSize: "1.0625rem", padding: "1rem 2.5rem" }}>
-                Start Free Trial — It&apos;s Free
+                Get Started
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
