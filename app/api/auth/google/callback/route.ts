@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { exchangeCodeForTokens } from "@/lib/google";
 import { getAccessToken, getAccounts, getLocations } from "@/lib/google-business";
+import { syncBusinessReviews } from "@/lib/sync-reviews";
 import { createClient } from "@supabase/supabase-js";
 
 export async function GET(request: NextRequest) {
@@ -19,32 +20,31 @@ export async function GET(request: NextRequest) {
     const tokens = await exchangeCodeForTokens(code);
 
     if (tokens.refresh_token) {
-      const supabase = createClient(
+      const admin = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.SUPABASE_SERVICE_ROLE_KEY!
       );
 
       // Store the refresh token
-      await supabase
+      await admin
         .from("businesses")
         .upsert(
           { user_id: userId, google_refresh_token: tokens.refresh_token },
           { onConflict: "user_id" }
         );
 
-      // Eagerly discover and store the account + location ID so the first
-      // sync is instant. Non-fatal if this fails — user can sync manually.
+      // Eagerly discover and store account + location ID
       try {
         const accessToken = await getAccessToken(tokens.refresh_token);
         const accounts    = await getAccounts(accessToken);
 
         if (accounts.length > 0) {
-          const accountId  = accounts[0].name;
-          const locations  = await getLocations(accessToken, accountId);
+          const accountId = accounts[0].name;
+          const locations = await getLocations(accessToken, accountId);
 
           if (locations.length > 0) {
             const location = locations[0];
-            await supabase
+            await admin
               .from("businesses")
               .update({
                 name:               location.title ?? null,
@@ -58,6 +58,25 @@ export async function GET(request: NextRequest) {
         console.error(
           "Non-fatal: failed to fetch location data during OAuth callback:",
           locationErr
+        );
+      }
+
+      // Auto-sync reviews immediately so the dashboard is populated on first visit
+      try {
+        const { data: business } = await admin
+          .from("businesses")
+          .select("id, google_refresh_token, google_account_id, google_location_id")
+          .eq("user_id", userId)
+          .single();
+
+        if (business?.google_refresh_token) {
+          const { synced } = await syncBusinessReviews(business, admin);
+          console.log(`Auto-sync on connect: ${synced} reviews synced for user ${userId}`);
+        }
+      } catch (syncErr) {
+        console.error(
+          "Non-fatal: auto-sync failed after OAuth connect:",
+          syncErr
         );
       }
     }

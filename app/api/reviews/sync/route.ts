@@ -1,13 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
-import {
-  getAccessToken,
-  getAccounts,
-  getLocations,
-  getReviews,
-  starRatingToNumber,
-} from "@/lib/google-business";
+import { syncBusinessReviews } from "@/lib/sync-reviews";
 
 export async function POST() {
   const supabase = await createClient();
@@ -38,68 +32,8 @@ export async function POST() {
   );
 
   try {
-    const accessToken = await getAccessToken(business.google_refresh_token);
-
-    let locationId: string = business.google_location_id;
-    let accountId: string  = business.google_account_id;
-
-    // If location ID not yet stored, discover it now
-    if (!locationId) {
-      const accounts = await getAccounts(accessToken);
-      if (!accounts.length) {
-        return NextResponse.json(
-          { error: "No Google Business accounts found for this Google account." },
-          { status: 404 }
-        );
-      }
-      accountId  = accounts[0].name;
-      const locations = await getLocations(accessToken, accountId);
-      if (!locations.length) {
-        return NextResponse.json(
-          { error: "No locations found for this Google Business account." },
-          { status: 404 }
-        );
-      }
-      locationId = locations[0].name;
-      const locationTitle = locations[0].title ?? null;
-
-      await admin
-        .from("businesses")
-        .update({
-          name:                locationTitle,
-          google_account_id:   accountId,
-          google_location_id:  locationId,
-        })
-        .eq("id", business.id);
-    }
-
-    const reviews = await getReviews(accessToken, locationId);
-
-    let syncedCount = 0;
-    for (const review of reviews) {
-      const { error } = await admin.from("reviews").upsert(
-        {
-          business_id:      business.id,
-          google_review_id: review.reviewId,
-          reviewer_name:    review.reviewer?.displayName ?? "Anonymous",
-          rating:           starRatingToNumber(review.starRating),
-          review_text:      review.comment ?? "",
-          review_date:      review.createTime,
-          reply_status:     review.reviewReply ? "published" : "pending",
-          reply_text:       review.reviewReply?.comment ?? null,
-        },
-        { onConflict: "google_review_id" }
-      );
-      if (!error) syncedCount++;
-      else console.error("Upsert error for review", review.reviewId, error);
-    }
-
-    await admin
-      .from("businesses")
-      .update({ last_synced_at: new Date().toISOString() })
-      .eq("id", business.id);
-
-    return NextResponse.json({ synced: syncedCount });
+    const { synced } = await syncBusinessReviews(business, admin);
+    return NextResponse.json({ synced });
   } catch (err) {
     console.error("Sync error:", err);
     return NextResponse.json({ error: String(err) }, { status: 500 });
