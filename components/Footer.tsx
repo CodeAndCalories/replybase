@@ -102,15 +102,19 @@ export default function Footer() {
               Legal
             </div>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-              {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (
-                <li key={item}>
+              {[
+                { label: "Privacy Policy", href: "/privacy" },
+                { label: "Terms of Service", href: "/terms" },
+                { label: "Data Deletion", href: "/data-deletion" },
+              ].map((item) => (
+                <li key={item.label}>
                   <Link
-                    href="#"
+                    href={item.href}
                     style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.5)", textDecoration: "none", transition: "color 0.2s ease" }}
                     onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#f0f0f0")}
                     onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)")}
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}
