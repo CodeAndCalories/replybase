@@ -75,3 +75,4 @@ This creates the `businesses`, `reviews`, and `subscriptions` tables with RLS po
 - [ ] Auto-send mode
 - [ ] Multi-location support
 - [ ] Brand voice training
+
