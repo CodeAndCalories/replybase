@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/lib/hooks/useToast";
-import { ToastContainer } from "@/components/ui/Toast";
+import ToastContainer from "@/components/ui/Toast";
 
 type Business = {
   name: string | null;
