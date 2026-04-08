@@ -98,65 +98,27 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
       <ReadingProgress />
 
-      <div style={{ background: "#0a0a0f", minHeight: "100vh", color: "#f0f0f0" }}>
+      <div style={{ background: "#050505", minHeight: "100vh", color: "#F0F0F0" }}>
         {/* Nav */}
-        <nav
-          style={{
-            borderBottom: "1px solid rgba(255,255,255,0.06)",
-            padding: "1rem 1.5rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            maxWidth: 1100,
-            margin: "0 auto",
-          }}
-        >
-          <Link
-            href="/"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              textDecoration: "none",
-            }}
-          >
-            <div
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: 8,
-                background: "linear-gradient(135deg, #7c6aff 0%, #00d4aa 100%)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "0.875rem",
-              }}
-            >
-              ✦
-            </div>
-            <span
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontWeight: 700,
-                fontSize: "1rem",
-                color: "#f0f0f0",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              ReplyBase
-            </span>
+        <nav style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+          background: "rgba(5,5,5,0.88)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          padding: "0 2rem",
+          height: 64,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
+          <Link href="/" style={{ display: "inline-flex", alignItems: "center", textDecoration: "none", gap: 0 }}>
+            <span style={{ fontWeight: 700, fontSize: "1.0625rem", color: "#F0F0F0", letterSpacing: "-0.02em" }}>Reply</span>
+            <span style={{ fontWeight: 700, fontSize: "1.0625rem", color: "#00E5CC", letterSpacing: "-0.02em" }}>Base</span>
           </Link>
-          <Link
-            href="/blog"
-            style={{
-              fontSize: "0.875rem",
-              color: "rgba(255,255,255,0.45)",
-              textDecoration: "none",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.375rem",
-            }}
-          >
+          <Link href="/blog" style={{ fontSize: "0.875rem", color: "#6B7280", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.375rem" }}>
             ← All articles
           </Link>
         </nav>
@@ -168,15 +130,15 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <span
               style={{
                 display: "inline-block",
-                background: "rgba(124,106,255,0.12)",
-                border: "1px solid rgba(124,106,255,0.25)",
+                background: "rgba(0,229,204,0.1)",
+                border: "1px solid rgba(0,229,204,0.25)",
                 borderRadius: 100,
                 padding: "0.3rem 0.875rem",
                 fontSize: "0.75rem",
                 fontWeight: 600,
                 letterSpacing: "0.07em",
                 textTransform: "uppercase",
-                color: "#a78bfa",
+                color: "#00E5CC",
               }}
             >
               Blog
@@ -270,18 +232,17 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             style={{
               marginTop: "3.5rem",
               padding: "2rem",
-              background: "rgba(124,106,255,0.07)",
-              border: "1px solid rgba(124,106,255,0.2)",
+              background: "#0D0D0D",
+              border: "1px solid rgba(0,229,204,0.2)",
               borderRadius: 16,
               textAlign: "center",
             }}
           >
             <p
               style={{
-                fontFamily: "'Space Grotesk', sans-serif",
                 fontSize: "1.125rem",
                 fontWeight: 700,
-                color: "#f0f0f0",
+                color: "#F0F0F0",
                 marginBottom: "0.625rem",
               }}
             >
@@ -290,7 +251,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <p
               style={{
                 fontSize: "0.9rem",
-                color: "rgba(255,255,255,0.5)",
+                color: "#6B7280",
                 marginBottom: "1.25rem",
                 lineHeight: 1.6,
               }}
@@ -298,7 +259,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               ReplyBase generates professional AI replies to every Google review.
               Approve with one click or enable auto-send.
             </p>
-            <Link href="/signup" className="btn-primary" style={{ display: "inline-flex" }}>
+            <Link href="/signup" style={{
+              display: "inline-flex", alignItems: "center", justifyContent: "center",
+              background: "#00E5CC", color: "#000",
+              fontWeight: 700, fontSize: "0.9375rem",
+              padding: "0.75rem 1.75rem", borderRadius: 9999,
+              textDecoration: "none",
+            }}>
               Get Started
             </Link>
           </div>

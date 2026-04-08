@@ -40,33 +40,9 @@ function LoginContent() {
     <div style={{ position: "relative", zIndex: 1, width: "100%", maxWidth: 420 }}>
       {/* Logo */}
       <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-        <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", textDecoration: "none" }}>
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: 10,
-              background: "linear-gradient(135deg, #7c6aff 0%, #00d4aa 100%)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "1rem",
-              boxShadow: "0 0 24px rgba(124,106,255,0.35)",
-            }}
-          >
-            ✦
-          </div>
-          <span
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontWeight: 700,
-              fontSize: "1.125rem",
-              color: "#f0f0f0",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            ReplyBase
-          </span>
+        <Link href="/" style={{ display: "inline-flex", alignItems: "center", textDecoration: "none", gap: 0 }}>
+          <span style={{ fontWeight: 700, fontSize: "1.125rem", color: "#F0F0F0", letterSpacing: "-0.02em" }}>Reply</span>
+          <span style={{ fontWeight: 700, fontSize: "1.125rem", color: "#00E5CC", letterSpacing: "-0.02em" }}>Base</span>
         </Link>
       </div>
 
@@ -167,7 +143,7 @@ function LoginContent() {
           ))}
 
           <div style={{ textAlign: "right", marginTop: "-0.5rem" }}>
-            <Link href="/forgot-password" style={{ fontSize: "0.8125rem", color: "#a78bfa", textDecoration: "none" }}>
+            <Link href="/forgot-password" style={{ fontSize: "0.8125rem", color: "#00E5CC", textDecoration: "none" }}>
               Forgot password?
             </Link>
           </div>
@@ -175,8 +151,7 @@ function LoginContent() {
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary"
-            style={{ width: "100%", justifyContent: "center", opacity: loading ? 0.6 : 1 }}
+            style={{ width: "100%", justifyContent: "center", opacity: loading ? 0.6 : 1, display: "flex", alignItems: "center", background: "#00E5CC", color: "#000", fontWeight: 700, fontSize: "1rem", padding: "0.875rem 2rem", borderRadius: 9999, border: "none", cursor: loading ? "default" : "pointer" }}
           >
             {loading ? "Logging in..." : "Log In"}
           </button>
@@ -184,7 +159,7 @@ function LoginContent() {
 
         <p style={{ textAlign: "center", marginTop: "1.5rem", fontSize: "0.875rem", color: "rgba(255,255,255,0.4)" }}>
           Don&apos;t have an account?{" "}
-          <Link href="/signup" style={{ color: "#a78bfa", textDecoration: "none", fontWeight: 500 }}>
+          <Link href="/signup" style={{ color: "#00E5CC", textDecoration: "none", fontWeight: 500 }}>
             Get Started
           </Link>
         </p>
@@ -198,7 +173,7 @@ export default function LoginPage() {
     <main
       style={{
         minHeight: "100vh",
-        background: "#0a0a0f",
+        background: "#050505",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -206,21 +181,6 @@ export default function LoginPage() {
         padding: "2rem 1.5rem",
       }}
     >
-      {/* Orb */}
-      <div
-        style={{
-          position: "fixed",
-          width: 500,
-          height: 500,
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          background: "radial-gradient(circle, rgba(0,212,170,0.09) 0%, transparent 70%)",
-          borderRadius: "50%",
-          filter: "blur(60px)",
-          pointerEvents: "none",
-        }}
-      />
       <Suspense fallback={<div />}>
         <LoginContent />
       </Suspense>

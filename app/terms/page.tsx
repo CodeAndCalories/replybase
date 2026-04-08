@@ -8,20 +8,20 @@ export const metadata = {
 
 export default function TermsPage() {
   return (
-    <main style={{ background: "#0a0a0f", minHeight: "100vh", color: "#f0f0f0" }}>
+    <main style={{ background: "#050505", minHeight: "100vh", color: "#f0f0f0" }}>
       <Navbar />
 
       <div style={{ maxWidth: 760, margin: "0 auto", padding: "9rem 1.5rem 5rem" }}>
         {/* Header */}
         <div style={{ marginBottom: "3rem" }}>
-          <p style={{ fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "0.08em", color: "#7c6aff", textTransform: "uppercase", marginBottom: "0.75rem" }}>
+          <p style={{ fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "0.08em", color: "#00E5CC", textTransform: "uppercase", marginBottom: "0.75rem" }}>
             Legal
           </p>
           <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem" }}>
             Terms of Service
           </h1>
           <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.45)" }}>
-            Effective date: April 2026 · ReplyBase (<a href="https://replybasehq.com" style={{ color: "#a78bfa", textDecoration: "none" }}>replybasehq.com</a>)
+            Effective date: April 2026 · ReplyBase (<a href="https://replybasehq.com" style={{ color: "#00E5CC", textDecoration: "none" }}>replybasehq.com</a>)
           </p>
         </div>
 
@@ -50,7 +50,7 @@ export default function TermsPage() {
           </Section>
 
           <Section title="5. Refund Policy">
-            <p>All subscription fees are non-refundable. We do not issue refunds or credits for partial months of service, unused features, or if you cancel mid-cycle. If you believe you have been charged in error, contact us at <a href="mailto:hello@replybasehq.com" style={{ color: "#a78bfa", textDecoration: "none" }}>hello@replybasehq.com</a> within 7 days of the charge.</p>
+            <p>All subscription fees are non-refundable. We do not issue refunds or credits for partial months of service, unused features, or if you cancel mid-cycle. If you believe you have been charged in error, contact us at <a href="mailto:hello@replybasehq.com" style={{ color: "#00E5CC", textDecoration: "none" }}>hello@replybasehq.com</a> within 7 days of the charge.</p>
           </Section>
 
           <Section title="6. User Responsibilities">
@@ -95,10 +95,10 @@ export default function TermsPage() {
             <p>For questions about these Terms, contact us at:</p>
             <p style={{ marginTop: "0.75rem" }}>
               <strong style={{ color: "#f0f0f0" }}>Email:</strong>{" "}
-              <a href="mailto:hello@replybasehq.com" style={{ color: "#a78bfa", textDecoration: "none" }}>hello@replybasehq.com</a>
+              <a href="mailto:hello@replybasehq.com" style={{ color: "#00E5CC", textDecoration: "none" }}>hello@replybasehq.com</a>
               <br />
               <strong style={{ color: "#f0f0f0" }}>Website:</strong>{" "}
-              <a href="https://replybasehq.com" style={{ color: "#a78bfa", textDecoration: "none" }}>replybasehq.com</a>
+              <a href="https://replybasehq.com" style={{ color: "#00E5CC", textDecoration: "none" }}>replybasehq.com</a>
             </p>
           </Section>
 

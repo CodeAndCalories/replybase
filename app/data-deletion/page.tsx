@@ -9,20 +9,20 @@ export const metadata = {
 
 export default function DataDeletionPage() {
   return (
-    <main style={{ background: "#0a0a0f", minHeight: "100vh", color: "#f0f0f0" }}>
+    <main style={{ background: "#050505", minHeight: "100vh", color: "#f0f0f0" }}>
       <Navbar />
 
       <div style={{ maxWidth: 760, margin: "0 auto", padding: "9rem 1.5rem 5rem" }}>
         {/* Header */}
         <div style={{ marginBottom: "3rem" }}>
-          <p style={{ fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "0.08em", color: "#7c6aff", textTransform: "uppercase", marginBottom: "0.75rem" }}>
+          <p style={{ fontSize: "0.8125rem", fontWeight: 600, letterSpacing: "0.08em", color: "#00E5CC", textTransform: "uppercase", marginBottom: "0.75rem" }}>
             Legal
           </p>
           <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "1rem" }}>
             Data Deletion
           </h1>
           <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.45)" }}>
-            Effective date: April 2026 · ReplyBase (<a href="https://replybasehq.com" style={{ color: "#a78bfa", textDecoration: "none" }}>replybasehq.com</a>)
+            Effective date: April 2026 · ReplyBase (<a href="https://replybasehq.com" style={{ color: "#00E5CC", textDecoration: "none" }}>replybasehq.com</a>)
           </p>
         </div>
 
@@ -35,8 +35,8 @@ export default function DataDeletionPage() {
           {/* Option 1 */}
           <div
             style={{
-              background: "rgba(124,106,255,0.06)",
-              border: "1px solid rgba(124,106,255,0.15)",
+              background: "#0D0D0D",
+              border: "1px solid rgba(255,255,255,0.07)",
               borderRadius: 16,
               padding: "1.75rem",
             }}
@@ -46,8 +46,8 @@ export default function DataDeletionPage() {
             </h2>
             <p>If you have an active ReplyBase account, you can delete it directly from the Settings page:</p>
             <ol style={{ marginTop: "0.75rem", paddingLeft: "1.25rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-              <li>Log in to your account at <a href="https://replybasehq.com/login" style={{ color: "#a78bfa", textDecoration: "none" }}>replybasehq.com/login</a>.</li>
-              <li>Go to <Link href="/dashboard/settings" style={{ color: "#a78bfa", textDecoration: "none" }}>Dashboard → Settings</Link>.</li>
+              <li>Log in to your account at <a href="https://replybasehq.com/login" style={{ color: "#00E5CC", textDecoration: "none" }}>replybasehq.com/login</a>.</li>
+              <li>Go to <Link href="/dashboard/settings" style={{ color: "#00E5CC", textDecoration: "none" }}>Dashboard → Settings</Link>.</li>
               <li>Scroll to the <strong style={{ color: "#f0f0f0" }}>Danger Zone</strong> section.</li>
               <li>Click <strong style={{ color: "#f0f0f0" }}>Delete account</strong> and confirm.</li>
             </ol>
@@ -76,7 +76,7 @@ export default function DataDeletionPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "0.5rem",
-                  color: "#a78bfa",
+                  color: "#00E5CC",
                   fontWeight: 600,
                   textDecoration: "none",
                   fontSize: "1rem",
@@ -104,7 +104,7 @@ export default function DataDeletionPage() {
           </div>
 
           <div>
-            <p>For any questions about your data or this process, contact us at <a href="mailto:hello@replybasehq.com" style={{ color: "#a78bfa", textDecoration: "none" }}>hello@replybasehq.com</a>.</p>
+            <p>For any questions about your data or this process, contact us at <a href="mailto:hello@replybasehq.com" style={{ color: "#00E5CC", textDecoration: "none" }}>hello@replybasehq.com</a>.</p>
           </div>
 
         </div>
