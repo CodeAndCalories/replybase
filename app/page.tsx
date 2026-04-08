@@ -36,7 +36,7 @@ const jsonLd = {
         price: "175",
         priceCurrency: "USD",
         priceValidUntil: "2026-12-31",
-        description: "14-day free trial included",
+        description: "Onboarding support included",
       },
       aggregateRating: {
         "@type": "AggregateRating",
@@ -404,15 +404,15 @@ export default function Home() {
       }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <p style={{ textAlign: "center", fontSize: "0.875rem", color: MUTED, marginBottom: "2.25rem" }}>
-            Trusted by local businesses across the US
+            Built for local businesses across the US
           </p>
           <div className="lp-stats-grid" style={{
             display: "flex", justifyContent: "center", gap: "4rem", flexWrap: "wrap",
           }}>
             {[
-              { value: "50,000+",  label: "Reviews Replied" },
+              { value: "10,000+",  label: "Reviews Replied" },
               { value: "< 30 sec", label: "Reply Time"      },
-              { value: "98%",      label: "Approval Rate"   },
+              { value: "4 min",    label: "Avg Setup Time"  },
               { value: "4.9★",     label: "Avg Rating"      },
             ].map((stat) => (
               <div key={stat.label} style={{ textAlign: "center" }}>
@@ -566,7 +566,7 @@ export default function Home() {
                   background: `${MINT}15`, color: MINT,
                   fontSize: "0.75rem", fontWeight: 600,
                   padding: "0.3rem 0.875rem", borderRadius: 9999,
-                }}>Most Popular</span>
+                }}>Everything Included</span>
               </div>
 
               {/* Price */}
@@ -588,7 +588,7 @@ export default function Home() {
                   "Auto-send mode",
                   "Brand voice learning",
                   "Multi-location (up to 3)",
-                  "Unlimited reviews",
+                  "Up to 500 reviews/mo",
                   "Email & push notifications",
                   "Reply analytics",
                   "Priority support",
@@ -614,7 +614,7 @@ export default function Home() {
                 Get Started
               </Link>
               <p style={{ textAlign: "center", fontSize: "0.75rem", color: MUTED, marginTop: "0.875rem" }}>
-                14-day free trial included.
+                First month includes full onboarding support.
               </p>
             </div>
 
