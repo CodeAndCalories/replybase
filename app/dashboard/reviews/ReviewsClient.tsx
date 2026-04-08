@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/lib/hooks/useToast";
+import { ToastContainer } from "@/components/ui/Toast";
 
 type Review = {
   id: string;
@@ -56,31 +58,90 @@ function formatDate(iso: string): string {
   }
 }
 
+function formatRelative(iso: string): string {
+  try {
+    const diffMs  = Date.now() - new Date(iso).getTime();
+    const diffMin = Math.floor(diffMs / 60_000);
+    if (diffMin < 1)   return "just now";
+    if (diffMin < 60)  return `${diffMin}m ago`;
+    const diffH = Math.floor(diffMin / 60);
+    if (diffH < 24)    return `${diffH}h ago`;
+    const diffD = Math.floor(diffH / 24);
+    if (diffD < 30)    return `${diffD}d ago`;
+    return formatDate(iso);
+  } catch {
+    return iso;
+  }
+}
+
+function EmptyIllustration() {
+  return (
+    <div
+      className="empty-state-icon"
+      style={{ position: "relative", width: 80, height: 80, margin: "0 auto" }}
+    >
+      {/* Central icon */}
+      <div
+        style={{
+          width: 80,
+          height: 80,
+          borderRadius: 22,
+          background: "rgba(124,106,255,0.08)",
+          border: "1px solid rgba(124,106,255,0.18)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(124,106,255,0.55)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      </div>
+      {/* Decorative dots */}
+      {[0, 120, 240].map((deg) => (
+        <div
+          key={deg}
+          style={{
+            position:  "absolute",
+            top:       "50%",
+            left:      "50%",
+            width:     6,
+            height:    6,
+            borderRadius: "50%",
+            background: "rgba(124,106,255,0.35)",
+            transform: `rotate(${deg}deg) translateX(46px) translateY(-50%)`,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function ReviewsClient({ reviews, businessName, hasConnectedBusiness, lastSyncedAt }: Props) {
   const router = useRouter();
+  const { toasts, addToast, removeToast } = useToast();
+
   const [replyDrafts, setReplyDrafts]     = useState<Record<string, string>>({});
   const [showReply, setShowReply]         = useState<Record<string, boolean>>({});
   const [generating, setGenerating]       = useState<Record<string, boolean>>({});
   const [posting, setPosting]             = useState<Record<string, boolean>>({});
   const [published, setPublished]         = useState<Record<string, boolean>>({});
   const [syncing, setSyncing]             = useState(false);
-  const [syncMessage, setSyncMessage]     = useState<string | null>(null);
   const [filter, setFilter]               = useState<"All" | "Pending" | "Replied">("All");
 
   async function handleSync() {
     setSyncing(true);
-    setSyncMessage(null);
     try {
       const res  = await fetch("/api/reviews/sync", { method: "POST" });
       const data = await res.json();
       if (!res.ok) {
-        setSyncMessage(`Sync failed: ${data.error}`);
+        addToast(`Sync failed: ${data.error}`, "error");
       } else {
-        setSyncMessage(`Synced ${data.synced} review${data.synced !== 1 ? "s" : ""}`);
+        addToast(`Synced ${data.synced} review${data.synced !== 1 ? "s" : ""}`, "success");
         router.refresh();
       }
     } catch {
-      setSyncMessage("Sync failed. Please try again.");
+      addToast("Sync failed. Please try again.", "error");
     } finally {
       setSyncing(false);
     }
@@ -102,8 +163,10 @@ export default function ReviewsClient({ reviews, businessName, hasConnectedBusin
       });
       const data = await res.json();
       setReplyDrafts((p) => ({ ...p, [review.id]: data.reply ?? "" }));
+      addToast("Reply generated — edit if needed, then send.", "success");
     } catch {
       setReplyDrafts((p) => ({ ...p, [review.id]: "" }));
+      addToast("Failed to generate reply. Please try again.", "error");
     } finally {
       setGenerating((p) => ({ ...p, [review.id]: false }));
     }
@@ -122,12 +185,13 @@ export default function ReviewsClient({ reviews, businessName, hasConnectedBusin
       if (res.ok) {
         setPublished((p) => ({ ...p, [reviewId]: true }));
         setShowReply((p) => ({ ...p, [reviewId]: false }));
+        addToast("Reply posted to Google.", "success");
       } else {
         const data = await res.json();
-        alert(`Failed to post reply: ${data.error}`);
+        addToast(`Failed to post reply: ${data.error}`, "error");
       }
     } catch {
-      alert("Failed to post reply. Please try again.");
+      addToast("Failed to post reply. Please try again.", "error");
     } finally {
       setPosting((p) => ({ ...p, [reviewId]: false }));
     }
@@ -206,39 +270,68 @@ export default function ReviewsClient({ reviews, businessName, hasConnectedBusin
           </div>
         </div>
 
-        {/* Sync status / last synced */}
-        {(syncMessage || lastSyncedAt) && (
-          <p style={{ marginTop: "0.625rem", fontSize: "0.8125rem", color: syncMessage ? (syncMessage.startsWith("Sync failed") ? "#f87171" : "#00d4aa") : "rgba(255,255,255,0.3)" }}>
-            {syncMessage ?? `Last synced ${formatDate(lastSyncedAt!)}`}
-          </p>
+        {/* Last synced indicator */}
+        {lastSyncedAt && (
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "0.375rem", marginTop: "0.625rem" }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            <span style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.28)" }}>
+              Last synced {formatRelative(lastSyncedAt)}
+            </span>
+          </div>
         )}
       </div>
 
       {/* No connected business */}
       {!hasConnectedBusiness && (
-        <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 18, padding: "4rem 2rem", textAlign: "center" }}>
-          <p style={{ fontSize: "1rem", fontWeight: 600, color: "rgba(255,255,255,0.6)", marginBottom: "0.5rem" }}>No Google Business Profile connected</p>
-          <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.35)", marginBottom: "1.5rem" }}>Go to Businesses to connect your Google Business Profile first.</p>
-          <a href="/dashboard/businesses" style={{ display: "inline-flex", padding: "0.625rem 1.5rem", borderRadius: 9, background: "#7c6aff", color: "#fff", fontWeight: 600, fontSize: "0.9rem", textDecoration: "none" }}>
-            Go to Businesses
+        <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 18, padding: "5rem 2rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
+          <EmptyIllustration />
+          <div>
+            <p style={{ fontSize: "1.0625rem", fontWeight: 700, color: "rgba(255,255,255,0.7)", marginBottom: "0.4rem" }}>
+              No Google Business Profile connected
+            </p>
+            <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.35)", maxWidth: 380, margin: "0 auto", lineHeight: 1.6 }}>
+              Connect your Google Business Profile to start managing and replying to reviews with AI.
+            </p>
+          </div>
+          <a
+            href="/dashboard/businesses"
+            style={{ display: "inline-flex", alignItems: "center", gap: "0.625rem", padding: "0.75rem 1.625rem", borderRadius: 10, background: "#7c6aff", color: "#fff", fontWeight: 600, fontSize: "0.9rem", textDecoration: "none", boxShadow: "0 0 28px rgba(124,106,255,0.38)" }}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Connect Google Business Profile
           </a>
         </div>
       )}
 
       {/* Empty state — connected but no reviews */}
       {hasConnectedBusiness && reviews.length === 0 && (
-        <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 18, padding: "5rem 2rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.25rem" }}>
-          <div style={{ width: 72, height: 72, borderRadius: 20, background: "rgba(124,106,255,0.08)", border: "1px solid rgba(124,106,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(124,106,255,0.5)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-          </div>
+        <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 18, padding: "5rem 2rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
+          <EmptyIllustration />
           <div>
             <p style={{ fontSize: "1.0625rem", fontWeight: 700, color: "rgba(255,255,255,0.7)", marginBottom: "0.4rem" }}>No reviews yet</p>
             <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.35)", maxWidth: 380, margin: "0 auto", lineHeight: 1.6 }}>
-              Click <strong style={{ color: "rgba(255,255,255,0.5)" }}>Sync Reviews</strong> to fetch reviews from your Google Business Profile.
+              Fetch your latest reviews from Google Business Profile.
             </p>
           </div>
+          <button
+            onClick={handleSync}
+            disabled={syncing}
+            style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.75rem 1.625rem", borderRadius: 10, border: "none", background: "#7c6aff", color: "#fff", fontWeight: 600, fontSize: "0.9rem", cursor: syncing ? "default" : "pointer", opacity: syncing ? 0.7 : 1, boxShadow: "0 0 28px rgba(124,106,255,0.38)" }}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+              style={{ animation: syncing ? "spin 1s linear infinite" : "none" }}>
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+              <path d="M16 21h5v-5" />
+            </svg>
+            {syncing ? "Syncing…" : "Sync Reviews"}
+          </button>
         </div>
       )}
 
@@ -253,8 +346,8 @@ export default function ReviewsClient({ reviews, businessName, hasConnectedBusin
       {filteredReviews.length > 0 && (
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           {filteredReviews.map((review) => {
-            const rc          = ratingColor(review.rating);
-            const isPublished = review.reply_status === "published" || published[review.id];
+            const rc           = ratingColor(review.rating);
+            const isPublished  = review.reply_status === "published" || published[review.id];
             const isGenerating = generating[review.id];
             const isPosting    = posting[review.id];
             const draft        = replyDrafts[review.id];
@@ -315,7 +408,7 @@ export default function ReviewsClient({ reviews, businessName, hasConnectedBusin
 
                   {/* Actions */}
                   {!isPublished && (
-                    <div style={{ display: "flex", gap: "0.625rem" }}>
+                    <div className="dash-review-actions" style={{ display: "flex", gap: "0.625rem" }}>
                       <button
                         onClick={() => handleGenerate(review)}
                         disabled={isGenerating}
@@ -388,9 +481,7 @@ export default function ReviewsClient({ reviews, businessName, hasConnectedBusin
         </div>
       )}
 
-      <style>{`
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      `}</style>
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
     </div>
   );
 }

@@ -283,6 +283,103 @@ body {
   transform: translateY(-3px);
 }
 
+/* ── Skeleton pulse ─────────────────────────────────────────────────────── */
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.skeleton-pulse {
+  animation: skeletonPulse 1.6s ease-in-out infinite;
+}
+
+/* ── Spin (shared dashboard utility) ───────────────────────────────────── */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Empty-state float animation ────────────────────────────────────────── */
+@keyframes emptyFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-7px) rotate(-2deg); }
+  66%       { transform: translateY(-4px) rotate(2deg); }
+}
+.empty-state-icon {
+  animation: emptyFloat 4s ease-in-out infinite;
+}
+
+/* ── Dashboard mobile: sidebar → bottom nav ─────────────────────────────── */
+@media (max-width: 767px) {
+  .dash-nav-root {
+    width:          100% !important;
+    height:         60px !important;
+    min-height:     0    !important;
+    position:       fixed !important;
+    bottom:         0    !important;
+    left:           0    !important;
+    top:            auto !important;
+    right:          0    !important;
+    flex-direction: row  !important;
+    border-right:   none !important;
+    border-top:     1px solid rgba(255,255,255,0.08) !important;
+    z-index:        50;
+    overflow:       hidden;
+  }
+  .dash-nav-logo { display: none !important; }
+  .dash-nav-user { display: none !important; }
+  .dash-nav-items {
+    flex:            1           !important;
+    flex-direction:  row         !important;
+    align-items:     center      !important;
+    justify-content: space-around !important;
+    padding:         0           !important;
+  }
+  /* hide the "Menu" label text */
+  .dash-nav-items > p { display: none !important; }
+  /* reflow each nav item to icon + tiny label stacked */
+  .dash-nav-item {
+    flex-direction:  column  !important;
+    gap:             0.2rem  !important;
+    padding:         0.5rem 0.875rem !important;
+    margin:          0 !important;
+    font-size:       0.625rem !important;
+    border:          none !important;
+    background:      transparent !important;
+    border-radius:   8px !important;
+    flex:            1 !important;
+    justify-content: center !important;
+  }
+  /* active item slight highlight */
+  .dash-nav-item[data-active="true"] {
+    background: rgba(124,106,255,0.12) !important;
+  }
+  /* hide the active left-bar indicator */
+  .dash-nav-active-bar { display: none !important; }
+  /* main content padding so it doesn't hide behind bottom nav */
+  .dash-main-content { padding-bottom: 68px; }
+}
+
+/* ── Dashboard mobile content fixes ─────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Business "how it works" 3-col → 1-col */
+  .dash-businesses-steps {
+    grid-template-columns: 1fr !important;
+  }
+  /* Review action buttons wrap */
+  .dash-review-actions {
+    flex-wrap: wrap;
+  }
+  /* Settings page full-width padding */
+  .dash-settings-page {
+    padding: 1.5rem !important;
+  }
+  /* Settings rows: allow label/control to wrap */
+  .dash-settings-row {
+    flex-wrap: wrap;
+    gap: 0.75rem !important;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

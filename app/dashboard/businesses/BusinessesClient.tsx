@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/lib/hooks/useToast";
+import { ToastContainer } from "@/components/ui/Toast";
 
 type Business = {
   name: string | null;
@@ -27,23 +29,22 @@ function formatDate(iso: string): string {
 
 export default function BusinessesClient({ business }: Props) {
   const router = useRouter();
-  const [syncing, setSyncing]         = useState(false);
-  const [syncMessage, setSyncMessage] = useState<string | null>(null);
+  const { toasts, addToast, removeToast } = useToast();
+  const [syncing, setSyncing] = useState(false);
 
   async function handleSync() {
     setSyncing(true);
-    setSyncMessage(null);
     try {
       const res  = await fetch("/api/reviews/sync", { method: "POST" });
       const data = await res.json();
       if (!res.ok) {
-        setSyncMessage(`Sync failed: ${data.error}`);
+        addToast(`Sync failed: ${data.error}`, "error");
       } else {
-        setSyncMessage(`Synced ${data.synced} review${data.synced !== 1 ? "s" : ""}`);
+        addToast(`Synced ${data.synced} review${data.synced !== 1 ? "s" : ""}`, "success");
         router.refresh();
       }
     } catch {
-      setSyncMessage("Sync failed. Please try again.");
+      addToast("Sync failed. Please try again.", "error");
     } finally {
       setSyncing(false);
     }
@@ -75,7 +76,7 @@ export default function BusinessesClient({ business }: Props) {
       </div>
 
       {/* How it works strip — always visible */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", marginBottom: "2rem" }}>
+      <div className="dash-businesses-steps" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem", marginBottom: "2rem" }}>
         {[
           { step: "01", title: "Connect",  desc: "Link your Google Business Profile with one click",   icon: "🔗" },
           { step: "02", title: "Monitor",  desc: "We watch for new reviews 24/7 automatically",        icon: "👁️" },
@@ -150,18 +151,16 @@ export default function BusinessesClient({ business }: Props) {
                 ? `Last synced ${formatDate(business.lastSyncedAt)}`
                 : "Not yet synced — click Sync Reviews to fetch your reviews"}
             </span>
-            {syncMessage && (
-              <span style={{ fontSize: "0.8125rem", color: syncMessage.startsWith("Sync failed") ? "#f87171" : "#00d4aa", fontWeight: 500 }}>
-                {syncMessage}
-              </span>
-            )}
           </div>
         </div>
       ) : (
         /* Empty state — no business connected */
         <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 18, padding: "5rem 2rem", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.25rem" }}>
-          <div style={{ width: 72, height: 72, borderRadius: 20, background: "rgba(124,106,255,0.08)", border: "1px solid rgba(124,106,255,0.15)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(124,106,255,0.5)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <div
+            className="empty-state-icon"
+            style={{ width: 80, height: 80, borderRadius: 22, background: "rgba(124,106,255,0.08)", border: "1px solid rgba(124,106,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(124,106,255,0.55)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
@@ -189,9 +188,7 @@ export default function BusinessesClient({ business }: Props) {
         </div>
       )}
 
-      <style>{`
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      `}</style>
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
     </div>
   );
 }

@@ -66,6 +66,7 @@ export default function DashboardNav({ email }: { email: string }) {
 
   return (
     <nav
+      className="dash-nav-root"
       style={{
         width: 240,
         minHeight: "100vh",
@@ -82,6 +83,7 @@ export default function DashboardNav({ email }: { email: string }) {
     >
       {/* Logo */}
       <div
+        className="dash-nav-logo"
         style={{
           padding: "1.5rem 1.25rem",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
@@ -127,7 +129,7 @@ export default function DashboardNav({ email }: { email: string }) {
       </div>
 
       {/* Nav items */}
-      <div style={{ padding: "1rem 0.75rem", flex: 1 }}>
+      <div className="dash-nav-items" style={{ padding: "1rem 0.75rem", flex: 1 }}>
         <p
           style={{
             fontSize: "0.6875rem",
@@ -147,6 +149,8 @@ export default function DashboardNav({ email }: { email: string }) {
             <Link
               key={item.href}
               href={item.href}
+              className="dash-nav-item"
+              data-active={active ? "true" : "false"}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -179,6 +183,7 @@ export default function DashboardNav({ email }: { email: string }) {
               {item.label}
               {active && (
                 <span
+                  className="dash-nav-active-bar"
                   style={{
                     position: "absolute",
                     left: 0,
@@ -198,6 +203,7 @@ export default function DashboardNav({ email }: { email: string }) {
 
       {/* User section */}
       <div
+        className="dash-nav-user"
         style={{
           padding: "1rem 0.75rem",
           borderTop: "1px solid rgba(255,255,255,0.06)",

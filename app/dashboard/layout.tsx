@@ -37,6 +37,7 @@ export default async function DashboardLayout({
     >
       <DashboardNav email={user.email!} />
       <main
+        className="dash-main-content"
         style={{
           flex: 1,
           overflowY: "auto",

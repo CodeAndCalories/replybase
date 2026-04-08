@@ -65,7 +65,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
           {title}
         </h3>
       </div>
-      <div style={{ padding: "0.25rem 0" }}>{children}</div>
+      <div style={{ padding: "0.25rem 0" }} className="dash-settings-section-body">{children}</div>
     </div>
   );
 }
@@ -83,6 +83,7 @@ function SettingRow({
 }) {
   return (
     <div
+      className="dash-settings-row"
       style={{
         display: "flex",
         alignItems: "center",
@@ -160,7 +161,7 @@ export default function SettingsClient({
   }
 
   return (
-    <div style={{ padding: "2.5rem", maxWidth: 720 }}>
+    <div className="dash-settings-page" style={{ padding: "2.5rem", maxWidth: 720 }}>
       {/* Header */}
       <div style={{ marginBottom: "2rem" }}>
         <p
