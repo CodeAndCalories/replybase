@@ -3,6 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+function smoothScroll(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  e.preventDefault();
+  const id = href.replace("#", "");
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -88,6 +95,7 @@ export default function Navbar() {
           <a
             key={link.label}
             href={link.href}
+            onClick={(e) => smoothScroll(e, link.href)}
             style={{
               fontSize: "0.9rem",
               fontWeight: 500,
@@ -177,7 +185,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              onClick={() => setMobileOpen(false)}
+              onClick={(e) => { smoothScroll(e, link.href); setMobileOpen(false); }}
               style={{ fontSize: "1rem", fontWeight: 500, color: "#f0f0f0", textDecoration: "none" }}
             >
               {link.label}

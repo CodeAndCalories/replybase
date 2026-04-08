@@ -267,7 +267,7 @@ export default function Home() {
       </section>
 
       {/* ─── HOW IT WORKS ─────────────────────────────────────────── */}
-      <section style={{ padding: "6rem 1.5rem" }}>
+      <section id="how-it-works" style={{ padding: "6rem 1.5rem" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           {/* Header */}
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
@@ -377,7 +377,7 @@ export default function Home() {
       </section>
 
       {/* ─── FEATURES ─────────────────────────────────────────────── */}
-      <section style={{ padding: "2rem 1.5rem 6rem" }}>
+      <section id="features" style={{ padding: "2rem 1.5rem 6rem" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "4rem" }}>
             <span className="badge" style={{ marginBottom: "1.25rem", display: "inline-flex" }}>Features</span>
@@ -472,7 +472,7 @@ export default function Home() {
       </section>
 
       {/* ─── PRICING ──────────────────────────────────────────────── */}
-      <section style={{ padding: "6rem 1.5rem", position: "relative", overflow: "hidden" }}>
+      <section id="pricing" style={{ padding: "6rem 1.5rem", position: "relative", overflow: "hidden" }}>
         {/* Background orb */}
         <div
           className="orb"
