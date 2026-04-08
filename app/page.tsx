@@ -192,7 +192,7 @@ function DashboardMockup() {
       {/* Container */}
       <div style={{
         background: SURFACE, border: `1px solid ${BORDER}`,
-        borderRadius: 18, padding: 24,
+        borderRadius: 18, padding: 32,
         boxShadow: "0 32px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03)",
       }}>
         {/* Window chrome */}
@@ -208,7 +208,7 @@ function DashboardMockup() {
         {/* Review card */}
         <div style={{
           background: "#111", border: "1px solid rgba(255,255,255,0.06)",
-          borderRadius: 12, padding: 16,
+          borderRadius: 12, padding: 20,
         }}>
           {/* Top row */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
@@ -220,7 +220,7 @@ function DashboardMockup() {
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: "0.625rem", fontWeight: 800, color: "#fff",
               }}>G</div>
-              <span style={{ fontSize: "0.8rem", fontWeight: 600, color: TEXT }}>New Review</span>
+              <span style={{ fontSize: "0.875rem", fontWeight: 600, color: TEXT }}>New Review</span>
             </div>
             <span style={{
               fontSize: "0.625rem", fontWeight: 600, color: MINT,
@@ -230,12 +230,12 @@ function DashboardMockup() {
 
           {/* Reviewer + stars */}
           <div style={{ display: "flex", alignItems: "center", gap: "0.625rem", marginBottom: 6 }}>
-            <span style={{ fontSize: "0.875rem", fontWeight: 600, color: TEXT }}>Sarah Chen</span>
-            <span style={{ fontSize: "0.8rem", color: "#FBBF24" }}>★★★★★</span>
+            <span style={{ fontSize: "0.9375rem", fontWeight: 600, color: TEXT }}>Sarah Chen</span>
+            <span style={{ fontSize: "0.875rem", color: "#FBBF24" }}>★★★★★</span>
           </div>
 
           {/* Review text */}
-          <p style={{ fontSize: "0.8125rem", color: MUTED, lineHeight: 1.55, marginBottom: 12 }}>
+          <p style={{ fontSize: "0.875rem", color: MUTED, lineHeight: 1.55, marginBottom: 12 }}>
             &ldquo;Absolutely fantastic service! Will definitely recommend to everyone.&rdquo;
           </p>
 
@@ -243,10 +243,10 @@ function DashboardMockup() {
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", margin: "0 0 12px" }} />
 
           {/* AI draft label */}
-          <p style={{ fontSize: "0.6875rem", fontWeight: 600, color: MINT, marginBottom: 6, letterSpacing: "0.04em" }}>
+          <p style={{ fontSize: "0.75rem", fontWeight: 600, color: MINT, marginBottom: 6, letterSpacing: "0.04em" }}>
             AI Reply Draft
           </p>
-          <p style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.6, marginBottom: 14 }}>
+          <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.6, marginBottom: 14 }}>
             &ldquo;Thank you so much, Sarah! We&rsquo;re thrilled you had a great experience and truly appreciate you taking the time to share this...&rdquo;
           </p>
 
@@ -306,11 +306,11 @@ export default function Home() {
       <PageNavbar />
 
       {/* ── HERO ───────────────────────────────────────────────────────── */}
-      <section style={{ paddingTop: "7rem", paddingBottom: "5rem", paddingLeft: "2rem", paddingRight: "2rem" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", minHeight: "calc(90vh - 7rem)", display: "flex", alignItems: "center" }}>
+      <section style={{ paddingTop: "120px", paddingBottom: "80px", paddingLeft: "2rem", paddingRight: "2rem" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="lp-hero-grid" style={{
             display: "grid",
-            gridTemplateColumns: "55fr 45fr",
+            gridTemplateColumns: "50fr 50fr",
             gap: "4rem",
             alignItems: "center",
             width: "100%",
@@ -382,9 +382,9 @@ export default function Home() {
               </div>
 
               {/* Trust strip */}
-              <div style={{ display: "flex", gap: "1.5rem", marginTop: 28, flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: "1rem", marginTop: 28, flexWrap: "nowrap" }}>
                 {["✓ Up to 500 reviews/mo", "✓ Setup in 2 minutes", "✓ Cancel anytime", "✓ Never miss a review again"].map((t) => (
-                  <span key={t} style={{ fontSize: "0.875rem", color: MUTED }}>{t}</span>
+                  <span key={t} style={{ fontSize: "0.75rem", color: MUTED, whiteSpace: "nowrap" }}>{t}</span>
                 ))}
               </div>
             </div>
@@ -400,7 +400,7 @@ export default function Home() {
         background: SURFACE,
         borderTop: "1px solid rgba(255,255,255,0.05)",
         borderBottom: "1px solid rgba(255,255,255,0.05)",
-        padding: "3.5rem 2rem",
+        padding: "4.5rem 2rem",
       }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <p style={{ textAlign: "center", fontSize: "0.875rem", color: MUTED, marginBottom: "2.25rem" }}>
@@ -416,8 +416,8 @@ export default function Home() {
               { value: "4.9★",     label: "Avg Rating"      },
             ].map((stat) => (
               <div key={stat.label} style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "2rem", fontWeight: 700, color: TEXT, lineHeight: 1.1 }}>{stat.value}</div>
-                <div style={{ fontSize: "0.875rem", color: MUTED, marginTop: "0.3rem" }}>{stat.label}</div>
+                <div style={{ fontSize: "2.25rem", fontWeight: 700, color: TEXT, lineHeight: 1.1 }}>{stat.value}</div>
+                <div style={{ fontSize: "1rem", color: MUTED, marginTop: "0.4rem" }}>{stat.label}</div>
               </div>
             ))}
           </div>
