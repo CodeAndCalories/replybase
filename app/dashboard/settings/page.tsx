@@ -12,5 +12,16 @@ export default async function SettingsPage() {
     redirect("/login");
   }
 
-  return <SettingsClient email={user.email!} />;
+  const { data: business } = await supabase
+    .from("businesses")
+    .select("auto_reply_enabled")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  return (
+    <SettingsClient
+      email={user.email!}
+      autoReplyEnabled={business?.auto_reply_enabled ?? false}
+    />
+  );
 }

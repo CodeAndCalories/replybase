@@ -15,7 +15,7 @@ export async function POST() {
 
   const { data: business } = await supabase
     .from("businesses")
-    .select("id, google_refresh_token, google_account_id, google_location_id")
+    .select("id, name, google_refresh_token, google_account_id, google_location_id, auto_reply_enabled")
     .eq("user_id", user.id)
     .single();
 

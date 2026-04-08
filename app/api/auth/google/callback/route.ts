@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
       try {
         const { data: business } = await admin
           .from("businesses")
-          .select("id, google_refresh_token, google_account_id, google_location_id")
+          .select("id, name, google_refresh_token, google_account_id, google_location_id, auto_reply_enabled")
           .eq("user_id", userId)
           .single();
 

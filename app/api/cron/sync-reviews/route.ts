@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
 
   const { data: businesses, error: fetchError } = await admin
     .from("businesses")
-    .select("id, google_refresh_token, google_account_id, google_location_id")
+    .select("id, name, google_refresh_token, google_account_id, google_location_id, auto_reply_enabled")
     .not("google_refresh_token", "is", null);
 
   if (fetchError) {

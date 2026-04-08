@@ -105,13 +105,43 @@ function SettingRow({
   );
 }
 
-export default function SettingsClient({ email }: { email: string }) {
-  const [autoReply, setAutoReply] = useState(false);
+export default function SettingsClient({
+  email,
+  autoReplyEnabled,
+}: {
+  email: string;
+  autoReplyEnabled: boolean;
+}) {
+  const [autoReply, setAutoReply] = useState(autoReplyEnabled);
+  const [autoReplyLoading, setAutoReplyLoading] = useState(false);
+  const [autoReplyError, setAutoReplyError] = useState("");
   const [emailNotifs, setEmailNotifs] = useState(true);
   const [weeklyDigest, setWeeklyDigest] = useState(true);
   const [lowRatingAlerts, setLowRatingAlerts] = useState(true);
   const [portalLoading, setPortalLoading] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+  async function handleAutoReplyToggle(enabled: boolean) {
+    setAutoReplyLoading(true);
+    setAutoReplyError("");
+    try {
+      const res = await fetch("/api/settings/auto-reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ enabled }),
+      });
+      if (!res.ok) {
+        const { error } = await res.json().catch(() => ({ error: "Unknown error" }));
+        setAutoReplyError(error ?? "Failed to save setting");
+        return;
+      }
+      setAutoReply(enabled);
+    } catch {
+      setAutoReplyError("Network error — please try again");
+    } finally {
+      setAutoReplyLoading(false);
+    }
+  }
 
   async function handleManage() {
     setPortalLoading(true);
@@ -276,12 +306,38 @@ export default function SettingsClient({ email }: { email: string }) {
           description="Automatically send AI-generated replies without manual approval"
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
-            <span style={{ fontSize: "0.8125rem", color: autoReply ? "#a78bfa" : "rgba(255,255,255,0.3)", fontWeight: 500 }}>
-              {autoReply ? "On" : "Off"}
-            </span>
-            <Toggle checked={autoReply} onChange={setAutoReply} />
+            {autoReplyLoading ? (
+              <span style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.3)", fontWeight: 500 }}>
+                Saving…
+              </span>
+            ) : (
+              <span style={{ fontSize: "0.8125rem", color: autoReply ? "#a78bfa" : "rgba(255,255,255,0.3)", fontWeight: 500 }}>
+                {autoReply ? "On" : "Off"}
+              </span>
+            )}
+            <Toggle
+              checked={autoReply}
+              onChange={(v) => {
+                if (!autoReplyLoading) handleAutoReplyToggle(v);
+              }}
+            />
           </div>
         </SettingRow>
+        {autoReplyError && (
+          <div
+            style={{
+              margin: "0 1.5rem 0.75rem",
+              padding: "0.75rem 1rem",
+              borderRadius: 10,
+              background: "rgba(248,113,113,0.08)",
+              border: "1px solid rgba(248,113,113,0.2)",
+              fontSize: "0.8125rem",
+              color: "#f87171",
+            }}
+          >
+            {autoReplyError}
+          </div>
+        )}
         {autoReply && (
           <div
             style={{
