@@ -1,7 +1,13 @@
 User-agent: *
 Allow: /
+Allow: /blog
+Allow: /blog/
 
 Disallow: /dashboard
+Disallow: /dashboard/
 Disallow: /api/
+Disallow: /welcome
+Disallow: /reset-password
+Disallow: /forgot-password
 
-Sitemap: https://replybase.io/sitemap.xml
+Sitemap: https://www.replybasehq.com/sitemap.xml

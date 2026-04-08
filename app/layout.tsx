@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = "https://replybasehq.com";
+const siteUrl = "https://www.replybasehq.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "ReplyBase — AI Review Reply Management for Local Businesses",
+  title: {
+    template: "%s | ReplyBase",
+    default: "ReplyBase — AI Google Review Replies for Local Businesses",
+  },
   description:
-    "ReplyBase automates Google review replies for local businesses. AI-powered review management, reputation management, and one-click approval. Never miss a Google review again.",
+    "ReplyBase automatically generates professional AI replies to your Google Business reviews. Approve with one click or enable auto-send. $175/mo.",
   keywords:
-    "review management, Google review replies, reputation management, AI review responses, local business reviews, Google Business Profile, review reply automation",
+    "google review management, reply to google reviews, google business profile management, review response software, local business reputation management, ai review replies, automate google reviews",
   robots: {
     index: true,
     follow: true,
@@ -28,27 +31,27 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "ReplyBase — AI Review Reply Management for Local Businesses",
+    title: "ReplyBase — AI Google Review Replies for Local Businesses",
     description:
-      "Automate Google review replies for your local business. AI-powered reputation management — approve with one click or auto-send. Protect your reputation on autopilot.",
+      "ReplyBase automatically generates professional AI replies to your Google Business reviews. Approve with one click or enable auto-send. $175/mo.",
     type: "website",
     url: siteUrl,
     siteName: "ReplyBase",
     images: [
       {
-        url: "/og-image.png",
+        url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "ReplyBase — AI Review Reply Management",
+        alt: "ReplyBase — AI Google Review Replies for Local Businesses",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ReplyBase — AI Review Reply Management for Local Businesses",
+    title: "ReplyBase — AI Google Review Replies for Local Businesses",
     description:
-      "Automate Google review replies for your local business. AI-powered reputation management — approve with one click or auto-send.",
-    images: ["/og-image.png"],
+      "Automatically generate professional AI replies to your Google Business reviews. Approve with one click or enable auto-send.",
+    images: [`${siteUrl}/og-image.png`],
   },
 };
 
