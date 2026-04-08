@@ -9,9 +9,9 @@
  *
  * When auto_reply_enabled = true, any pending review with no reply_text will
  * have a reply generated via Anthropic and posted directly to Google.
- * This naturally runs once per review — once posted, reply_status becomes
- * 'published' and the review is never targeted again. If posting fails the
- * review stays pending and is retried on the next sync.
+ *
+ * Email notifications are sent (via Resend) for each newly inserted review —
+ * i.e. reviews that didn't exist in the DB before this sync run.
  */
 
 import { SupabaseClient } from "@supabase/supabase-js";
@@ -24,9 +24,11 @@ import {
   starRatingToNumber,
 } from "@/lib/google-business";
 import { generateReply } from "@/lib/ai-replies";
+import { sendNewReviewNotification } from "@/lib/email";
 
 export type SyncableBusiness = {
   id: string;
+  user_id: string;
   name: string | null;
   google_refresh_token: string;
   google_account_id: string | null;
@@ -71,8 +73,27 @@ export async function syncBusinessReviews(
 
   const reviews = await getReviews(accessToken, locationId);
 
+  // ── Snapshot existing review IDs so we can detect genuinely new inserts ──
+  const { data: existingRows } = await admin
+    .from("reviews")
+    .select("google_review_id")
+    .eq("business_id", business.id);
+
+  const existingIds = new Set<string>(
+    (existingRows ?? []).map((r: { google_review_id: string }) => r.google_review_id)
+  );
+
+  // ── Upsert all reviews from Google ────────────────────────────────────────
   let synced = 0;
+  const newReviews: Array<{
+    reviewerName: string;
+    rating: number;
+    reviewText: string;
+  }> = [];
+
   for (const review of reviews) {
+    const isNew = !existingIds.has(review.reviewId);
+
     const { error } = await admin.from("reviews").upsert(
       {
         business_id:      business.id,
@@ -86,14 +107,64 @@ export async function syncBusinessReviews(
       },
       { onConflict: "google_review_id" }
     );
-    if (!error) synced++;
-    else console.error(`Upsert error for review ${review.reviewId}:`, error);
+
+    if (!error) {
+      synced++;
+      if (isNew) {
+        newReviews.push({
+          reviewerName: review.reviewer?.displayName ?? "Anonymous",
+          rating:       starRatingToNumber(review.starRating),
+          reviewText:   review.comment ?? "",
+        });
+      }
+    } else {
+      console.error(`Upsert error for review ${review.reviewId}:`, error);
+    }
   }
 
   await admin
     .from("businesses")
     .update({ last_synced_at: new Date().toISOString() })
     .eq("id", business.id);
+
+  // ── Email notifications for new reviews ───────────────────────────────────
+  // Fetch the owner's email lazily — only when there are new reviews to report.
+  if (newReviews.length > 0) {
+    try {
+      const { data: { user }, error: userErr } =
+        await admin.auth.admin.getUserById(business.user_id);
+
+      if (userErr || !user?.email) {
+        console.error(
+          `Notifications: could not look up email for user ${business.user_id}:`,
+          userErr
+        );
+      } else {
+        // Fire all notification emails in parallel; sendNewReviewNotification
+        // is already non-throwing so Promise.allSettled isn't strictly needed,
+        // but keeps the pattern consistent.
+        await Promise.allSettled(
+          newReviews.map((r) =>
+            sendNewReviewNotification(
+              user.email!,
+              businessName,
+              r.reviewerName,
+              r.rating,
+              r.reviewText
+            )
+          )
+        );
+        console.log(
+          `Notifications: sent ${newReviews.length} email(s) to ${user.email} for business ${business.id}`
+        );
+      }
+    } catch (notifErr) {
+      console.error(
+        `Notifications: unexpected error for business ${business.id}:`,
+        notifErr
+      );
+    }
+  }
 
   // ── Auto-reply ──────────────────────────────────────────────────────────────
   // Only runs when the business owner has opted in. Targets every review that
