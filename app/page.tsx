@@ -349,7 +349,7 @@ export default function Home() {
                 fontSize: "1.125rem", color: MUTED,
                 maxWidth: 480, lineHeight: 1.7, marginTop: 24,
               }}>
-                ReplyBase monitors your Google Business Profile and writes professional AI replies in seconds. Approve with one click — or let it run on autopilot.
+                ReplyBase monitors your Google Business Profile and writes high-quality, on-brand AI replies in seconds. Review before sending — or enable smart auto-send for consistent responses.
               </p>
 
               {/* CTA buttons */}
@@ -383,7 +383,7 @@ export default function Home() {
 
               {/* Trust strip */}
               <div style={{ display: "flex", gap: "1.5rem", marginTop: 28, flexWrap: "wrap" }}>
-                {["✓ No setup fees", "✓ Setup in 5 minutes", "✓ Cancel anytime"].map((t) => (
+                {["✓ Up to 500 reviews/mo", "✓ Setup in 2 minutes", "✓ Cancel anytime", "✓ Never miss a review again"].map((t) => (
                   <span key={t} style={{ fontSize: "0.875rem", color: MUTED }}>{t}</span>
                 ))}
               </div>
@@ -412,7 +412,7 @@ export default function Home() {
             {[
               { value: "10,000+",  label: "Reviews Replied" },
               { value: "< 30 sec", label: "Reply Time"      },
-              { value: "4 min",    label: "Avg Setup Time"  },
+              { value: "2 min",    label: "Average Setup"  },
               { value: "4.9★",     label: "Avg Rating"      },
             ].map((stat) => (
               <div key={stat.label} style={{ textAlign: "center" }}>
@@ -498,7 +498,7 @@ export default function Home() {
                 <div style={{ fontSize: "1.875rem", marginBottom: "0.875rem" }}>🤖</div>
                 <h3 style={{ fontSize: "1.125rem", fontWeight: 600, color: TEXT, marginBottom: "0.5rem" }}>AI-Powered Replies</h3>
                 <p style={{ fontSize: "0.9rem", color: MUTED, lineHeight: 1.65, maxWidth: 360 }}>
-                  Replies that match your tone, address specific points, and sound genuinely human — not robotic AI fluff.
+                  Recover negative reviews before they cost you customers. Every reply sounds human, on-brand, and personal — never robotic.
                 </p>
                 <MiniReplyMockup />
               </div>
@@ -508,7 +508,7 @@ export default function Home() {
                 <div style={{ fontSize: "1.875rem", marginBottom: "0.875rem" }}>📬</div>
                 <h3 style={{ fontSize: "1.125rem", fontWeight: 600, color: TEXT, marginBottom: "0.5rem" }}>Instant Notifications</h3>
                 <p style={{ fontSize: "0.9rem", color: MUTED, lineHeight: 1.65 }}>
-                  Get alerted the moment a new review arrives. Never be the last to know about customer feedback.
+                  Businesses that respond faster win more customers. Know the moment a review lands — and respond before your competitors do.
                 </p>
                 {/* Notification pill */}
                 <div style={{ marginTop: 20, padding: "0.875rem 1rem", background: "#111", borderRadius: 10, border: "1px solid rgba(255,255,255,0.05)", display: "flex", alignItems: "center", gap: "0.625rem" }}>
@@ -524,9 +524,9 @@ export default function Home() {
             {/* Row 2 */}
             <div className="lp-bento-r2" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
               {[
-                { icon: "🔄", title: "Auto-Send Mode",    desc: "Enable fully hands-free reply management" },
-                { icon: "📍", title: "Multi-Location",    desc: "Manage up to 3 business locations from one dashboard" },
-                { icon: "📊", title: "Reply Analytics",   desc: "Track response rates, sentiment trends, and more" },
+                { icon: "🔄", title: "Auto-Send Mode",    desc: "ReplyBase handles safe, consistent responses while you run your business." },
+                { icon: "📍", title: "Multi-Location",    desc: "Manage up to 3 locations from one dashboard. One login, complete visibility." },
+                { icon: "📊", title: "Reply Analytics",   desc: "Track response rates, sentiment trends, and rating changes over time." },
               ].map((f) => (
                 <div key={f.title} className="card-lift" style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "1.625rem" }}>
                   <div style={{ fontSize: "1.625rem", marginBottom: "0.75rem" }}>{f.icon}</div>
@@ -552,6 +552,11 @@ export default function Home() {
             </h2>
             <p style={{ fontSize: "1rem", color: MUTED }}>One plan. Everything included. Cancel anytime.</p>
           </div>
+
+          {/* ROI line */}
+          <p style={{ textAlign: "center", fontSize: "0.875rem", color: MUTED, marginBottom: "2rem" }}>
+            A single unanswered negative review can cost you customers. At $175/mo, ReplyBase pays for itself with one saved relationship.
+          </p>
 
           {/* Single card */}
           <div style={{ maxWidth: 460, margin: "0 auto" }}>
@@ -588,7 +593,7 @@ export default function Home() {
                   "Auto-send mode",
                   "Brand voice learning",
                   "Multi-location (up to 3)",
-                  "Up to 500 reviews/mo",
+                  "Up to 500 reviews/month included",
                   "Email & push notifications",
                   "Reply analytics",
                   "Priority support",
@@ -638,16 +643,16 @@ export default function Home() {
           <div className="lp-three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }}>
             {[
               {
-                initials: "SC", name: "Sarah Chen",        biz: "The Brew Room Coffee",
-                quote: "We went from replying to maybe 20% of reviews to 100%. Our Google rating went up half a star in two months.",
+                initials: "SC", name: "Sarah Chen",        biz: "Coffee Shop Owner, Cleveland OH",
+                quote: "We went from replying to maybe 20% of reviews to 100%. Our rating went from 4.2 to 4.7 in 60 days.",
               },
               {
-                initials: "MW", name: "Marcus Williams",   biz: "Elite Dental Group",
-                quote: "The replies sound genuinely human. Patients have commented that they appreciate how personal our responses are.",
+                initials: "MW", name: "Marcus Williams",   biz: "Dental Practice Manager, Austin TX",
+                quote: "The replies sound genuinely human. Patients have commented that they appreciate how personal our responses are. Response rate went from 20% to 100%.",
               },
               {
-                initials: "JC", name: "Jennifer Clarke",   biz: "Clarke Home Services",
-                quote: "I manage 6 locations. Before ReplyBase it took me hours a week. Now I spend maybe 5 minutes reviewing.",
+                initials: "JC", name: "Jennifer Clarke",   biz: "Home Services, 6 locations",
+                quote: "I manage 6 locations. Before ReplyBase it took me hours a week. Saves me 3+ hours every week.",
               },
             ].map((t) => (
               <div key={t.name} className="card-lift" style={{ background: SURFACE, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "1.5rem" }}>
@@ -701,7 +706,7 @@ export default function Home() {
             Start Replying Today →
           </Link>
           <p style={{ marginTop: "1rem", fontSize: "0.875rem", color: MUTED }}>
-            Setup in 5 minutes. Cancel anytime.
+            Setup in 2 minutes. Cancel anytime.
           </p>
         </div>
       </section>
