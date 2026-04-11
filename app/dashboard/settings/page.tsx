@@ -14,7 +14,7 @@ export default async function SettingsPage() {
 
   const { data: business } = await supabase
     .from("businesses")
-    .select("auto_reply_enabled")
+    .select("auto_reply_enabled, reply_tone")
     .eq("user_id", user.id)
     .maybeSingle();
 
@@ -22,6 +22,7 @@ export default async function SettingsPage() {
     <SettingsClient
       email={user.email!}
       autoReplyEnabled={business?.auto_reply_enabled ?? false}
+      replyTone={business?.reply_tone ?? "professional"}
     />
   );
 }

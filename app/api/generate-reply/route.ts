@@ -17,8 +17,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
+  const { data: business } = await supabase
+    .from("businesses")
+    .select("reply_tone")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  const tone = business?.reply_tone ?? "professional";
+
   try {
-    const reply = await generateReply({ reviewerName, rating, reviewText, businessName });
+    const reply = await generateReply({ reviewerName, rating, reviewText, businessName, tone });
     return NextResponse.json({ reply });
   } catch (err) {
     console.error("Generate reply error:", err);

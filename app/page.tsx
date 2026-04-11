@@ -591,7 +591,7 @@ export default function Home() {
                 {[
                   "AI reply generation",
                   "Auto-send mode",
-                  "Brand voice learning",
+                  "Custom reply tone settings",
                   "Multi-location (up to 3)",
                   "Up to 500 reviews/month included",
                   "Email & push notifications",

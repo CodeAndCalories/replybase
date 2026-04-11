@@ -109,13 +109,16 @@ function SettingRow({
 export default function SettingsClient({
   email,
   autoReplyEnabled,
+  replyTone,
 }: {
   email: string;
   autoReplyEnabled: boolean;
+  replyTone: string;
 }) {
   const [autoReply, setAutoReply] = useState(autoReplyEnabled);
   const [autoReplyLoading, setAutoReplyLoading] = useState(false);
   const [autoReplyError, setAutoReplyError] = useState("");
+  const [selectedTone, setSelectedTone] = useState(replyTone);
   const [emailNotifs, setEmailNotifs] = useState(true);
   const [weeklyDigest, setWeeklyDigest] = useState(true);
   const [lowRatingAlerts, setLowRatingAlerts] = useState(true);
@@ -142,6 +145,15 @@ export default function SettingsClient({
     } finally {
       setAutoReplyLoading(false);
     }
+  }
+
+  async function handleToneChange(tone: string) {
+    setSelectedTone(tone);
+    await fetch("/api/settings/reply-tone", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tone }),
+    });
   }
 
   async function handleManage() {
@@ -367,6 +379,8 @@ export default function SettingsClient({
           description="How the AI sounds in generated replies"
         >
           <select
+            value={selectedTone}
+            onChange={(e) => handleToneChange(e.target.value)}
             style={{
               padding: "0.4375rem 0.75rem",
               borderRadius: 8,

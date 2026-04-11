@@ -1,27 +1,38 @@
+const TONE_INSTRUCTIONS: Record<string, string> = {
+  professional: "Use a professional, polished tone — formal but not stiff.",
+  friendly: "Use a warm, friendly tone — conversational and approachable.",
+  concise: "Be extremely brief and to the point — no more than 2 sentences.",
+  enthusiastic: "Use an enthusiastic, upbeat tone — genuinely excited and energetic.",
+};
+
 interface ReviewInput {
   reviewerName: string;
   rating: number;
   reviewText: string;
   businessName: string;
+  tone?: string;
 }
 
 export async function generateReply(review: ReviewInput): Promise<string> {
-  const { reviewerName, rating, reviewText, businessName } = review;
+  const { reviewerName, rating, reviewText, businessName, tone = "professional" } = review;
 
   const isNegative = rating <= 2;
-  const tone = isNegative
+  const sentiment = isNegative
     ? "acknowledge the concern, apologize sincerely, and offer to make it right by inviting them to contact you directly"
     : "express genuine gratitude, mention the team, and invite them to return";
+
+  const toneInstruction = TONE_INSTRUCTIONS[tone] ?? TONE_INSTRUCTIONS.professional;
 
   const prompt = `You are writing a Google Business review reply for ${businessName}.
 
 Review from ${reviewerName} (${rating}/5 stars):
 "${reviewText}"
 
-Write a professional but warm reply that:
+Write a reply that:
 - Addresses ${reviewerName} by name
 - Addresses specific points they mentioned
-- ${tone}
+- ${sentiment}
+- ${toneInstruction}
 - Is 2-4 sentences max
 - Has no generic fluff or filler phrases
 - Does not use exclamation points excessively
