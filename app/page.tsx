@@ -33,7 +33,7 @@ const jsonLd = {
         "AI-powered review reply management for local businesses. Automate Google review responses and approve replies with one click.",
       offers: {
         "@type": "Offer",
-        price: "175",
+        price: "99",
         priceCurrency: "USD",
         priceValidUntil: "2026-12-31",
         description: "Onboarding support included",
@@ -365,7 +365,7 @@ export default function Home() {
                   onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.filter = "brightness(110%)")}
                   onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.filter = "none")}
                 >
-                  Get Started — $175/mo
+                  Get Started — $99/mo
                 </Link>
                 <a href="#how-it-works" onClick={(e) => smoothScroll(e, "#how-it-works")} style={{
                   border: "1px solid rgba(255,255,255,0.16)", color: TEXT,
@@ -384,7 +384,7 @@ export default function Home() {
 
               {/* Trust strip */}
               <div style={{ display: "flex", gap: "1rem", marginTop: 28, flexWrap: "nowrap" }}>
-                {["✓ Up to 500 reviews/mo", "✓ Setup in 2 minutes", "✓ Cancel anytime", "✓ Never miss a review again"].map((t) => (
+                {["✓ 200 AI replies/mo", "✓ Setup in 2 minutes", "✓ Cancel anytime", "✓ Never miss a review again"].map((t) => (
                   <span key={t} style={{ fontSize: "0.75rem", color: MUTED, whiteSpace: "nowrap" }}>{t}</span>
                 ))}
               </div>
@@ -556,7 +556,7 @@ export default function Home() {
 
           {/* ROI line */}
           <p style={{ textAlign: "center", fontSize: "0.875rem", color: MUTED, marginBottom: "2rem" }}>
-            A single unanswered negative review can cost you customers. At $175/mo, ReplyBase pays for itself with one saved relationship.
+            A single unanswered negative review can cost you customers. At $99/mo, ReplyBase pays for itself with one saved relationship.
           </p>
 
           {/* Single card */}
@@ -578,7 +578,7 @@ export default function Home() {
               {/* Price */}
               <div style={{ textAlign: "center" }}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: "0.25rem" }}>
-                  <span style={{ fontSize: "4rem", fontWeight: 800, color: TEXT, lineHeight: 1 }}>$175</span>
+                  <span style={{ fontSize: "4rem", fontWeight: 800, color: TEXT, lineHeight: 1 }}>$99</span>
                   <span style={{ fontSize: "1.125rem", color: MUTED }}>/mo</span>
                 </div>
                 <p style={{ fontSize: "0.875rem", color: MUTED, marginTop: "0.5rem" }}>Everything included. Cancel anytime.</p>
@@ -594,7 +594,7 @@ export default function Home() {
                   "Auto-send mode",
                   "Custom reply tone settings",
                   "Multi-location (up to 3)",
-                  "Up to 500 reviews/month included",
+                  "200 AI replies/month included",
                   "Email & push notifications",
                   "Reply analytics",
                   "Priority support",

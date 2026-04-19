@@ -307,7 +307,7 @@ export default function SettingsClient({
                 }}
               />
             </div>
-            <span style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.4)" }}>0 / 500</span>
+            <span style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.4)" }}>0 / 200</span>
           </div>
         </SettingRow>
       </Section>

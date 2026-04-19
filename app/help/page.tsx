@@ -137,7 +137,7 @@ const steps = [
       "Enter your email and password",
       "Check your inbox for a confirmation email",
       'Click "Confirm my email" in the email',
-      "You'll be redirected to complete payment ($175/mo)",
+      "You'll be redirected to complete payment ($99/mo)",
       "After payment you'll land on your dashboard",
     ],
   },
@@ -206,7 +206,7 @@ const faqs = [
   },
   {
     q: "How many reviews can I manage?",
-    a: "Your plan includes up to 500 reviews per month. This covers the vast majority of local businesses.",
+    a: "Your plan includes 200 AI replies per month. This covers the vast majority of local businesses.",
   },
   {
     q: "Can I manage multiple locations?",

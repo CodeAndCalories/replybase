@@ -172,6 +172,25 @@ export async function syncBusinessReviews(
   // been replied to yet. Once a reply is successfully posted the row becomes
   // 'published', so each review is only auto-replied to once.
   if (business.auto_reply_enabled) {
+    // Check monthly reply limit before processing
+    const startOfMonth = new Date();
+    startOfMonth.setDate(1);
+    startOfMonth.setHours(0, 0, 0, 0);
+
+    const { count: monthlyCount } = await admin
+      .from("reviews")
+      .select("id", { count: "exact", head: true })
+      .eq("business_id", business.id)
+      .eq("reply_status", "published")
+      .gte("created_at", startOfMonth.toISOString());
+
+    if ((monthlyCount ?? 0) >= 200) {
+      console.log(
+        `Auto-reply: monthly limit reached for business ${business.id} — skipping auto-reply`
+      );
+      return { synced };
+    }
+
     const { data: pendingReviews, error: fetchErr } = await admin
       .from("reviews")
       .select("id, reviewer_name, rating, review_text, google_review_id")
