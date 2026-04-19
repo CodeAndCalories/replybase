@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     default: "ReplyBase — AI Google Review Replies for Local Businesses",
   },
   description:
-    "ReplyBase automatically generates professional AI replies to your Google Business reviews. Approve with one click or enable auto-send. $175/mo.",
+    "ReplyBase automatically generates professional AI replies to your Google Business reviews. Approve with one click or enable auto-send. $99/mo.",
   keywords:
     "google review management, reply to google reviews, google business profile management, review response software, local business reputation management, ai review replies, automate google reviews",
   robots: {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ReplyBase — AI Google Review Replies for Local Businesses",
     description:
-      "ReplyBase automatically generates professional AI replies to your Google Business reviews. Approve with one click or enable auto-send. $175/mo.",
+      "ReplyBase automatically generates professional AI replies to your Google Business reviews. Approve with one click or enable auto-send. $99/mo.",
     type: "website",
     url: siteUrl,
     siteName: "ReplyBase",
