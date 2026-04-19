@@ -43,6 +43,7 @@ export default function BlogPage() {
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <Link href="/" style={{ fontSize: "0.875rem", color: "#6B7280", textDecoration: "none" }}>← Home</Link>
+          <Link href="/help" style={{ fontSize: "0.875rem", color: "#6B7280", textDecoration: "none" }}>Help</Link>
           <Link href="/signup" style={{
             fontSize: "0.875rem", fontWeight: 600, color: "#000",
             background: "#00E5CC", textDecoration: "none",

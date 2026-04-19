@@ -118,9 +118,12 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             <span style={{ fontWeight: 700, fontSize: "1.0625rem", color: "#F0F0F0", letterSpacing: "-0.02em" }}>Reply</span>
             <span style={{ fontWeight: 700, fontSize: "1.0625rem", color: "#00E5CC", letterSpacing: "-0.02em" }}>Base</span>
           </Link>
-          <Link href="/blog" style={{ fontSize: "0.875rem", color: "#6B7280", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.375rem" }}>
-            ← All articles
-          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <Link href="/blog" style={{ fontSize: "0.875rem", color: "#6B7280", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.375rem" }}>
+              ← All articles
+            </Link>
+            <Link href="/help" style={{ fontSize: "0.875rem", color: "#6B7280", textDecoration: "none" }}>Help</Link>
+          </div>
         </nav>
 
         {/* Article */}

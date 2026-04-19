@@ -60,15 +60,20 @@ export default function Footer() {
               Product
             </div>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-              {["Features", "Pricing", "How it Works", "Changelog"].map((item) => (
-                <li key={item}>
+              {[
+                { label: "Features", href: "#" },
+                { label: "Pricing", href: "#" },
+                { label: "How it Works", href: "#" },
+                { label: "Help & Setup Guide", href: "/help" },
+              ].map((item) => (
+                <li key={item.label}>
                   <Link
-                    href="#"
+                    href={item.href}
                     style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.5)", textDecoration: "none", transition: "color 0.2s ease" }}
                     onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#f0f0f0")}
                     onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "rgba(255,255,255,0.5)")}
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}
