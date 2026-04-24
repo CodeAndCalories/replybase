@@ -862,6 +862,436 @@ export const CITIES: Record<string, CityData> = {
     competitionNote:
       "Santa Ana's community-driven business culture means review engagement isn't just good strategy — it's expected by the customers who matter most.",
   },
+  "tulsa": {
+    slug: "tulsa",
+    name: "Tulsa",
+    state: "Oklahoma",
+    stateAbbr: "OK",
+    localCopy:
+      "Tulsa's tight-knit business community and growing downtown scene mean local businesses compete fiercely for the loyalty of repeat customers — your Google review profile is your most visible credibility signal.",
+    competitionNote:
+      "Tulsa's entrepreneurial spirit and strong community ties reward businesses that demonstrate responsiveness and care through their online reputation.",
+  },
+  "wichita": {
+    slug: "wichita",
+    name: "Wichita",
+    state: "Kansas",
+    stateAbbr: "KS",
+    localCopy:
+      "Wichita's aerospace industry roots and practical consumer culture mean customers value reliability above all — and Google reviews are how they verify it before choosing a business.",
+    competitionNote:
+      "Wichita's business community is close-knit and word travels fast — a strong Google review profile amplifies that word-of-mouth to thousands of potential customers.",
+  },
+  "corpus-christi": {
+    slug: "corpus-christi",
+    name: "Corpus Christi",
+    state: "Texas",
+    stateAbbr: "TX",
+    localCopy:
+      "Corpus Christi's coastal community and tourism-driven economy mean local businesses serve both loyal regulars and first-time visitors year-round — your Google profile connects with both audiences.",
+    competitionNote:
+      "Corpus Christi's mix of locals and seasonal visitors means businesses with active review profiles capture new customers continuously.",
+  },
+  "riverside": {
+    slug: "riverside",
+    name: "Riverside",
+    state: "California",
+    stateAbbr: "CA",
+    localCopy:
+      "Riverside's Inland Empire economy and large commuter population mean most business decisions are made online before anyone makes the drive — your Google review profile does the selling before you even open your door.",
+    competitionNote:
+      "Riverside's competitive Inland Empire market means businesses with strong Google profiles consistently outperform those that rely on word-of-mouth alone.",
+  },
+  "lexington": {
+    slug: "lexington",
+    name: "Lexington",
+    state: "Kentucky",
+    stateAbbr: "KY",
+    localCopy:
+      "Lexington's university culture and thriving horse country tourism create a diverse consumer base that relies on Google reviews to discover and evaluate the local businesses that define the Bluegrass State experience.",
+    competitionNote:
+      "Lexington's blend of students, professionals, and tourists means your Google profile is constantly being discovered by new potential customers.",
+  },
+  "st-louis": {
+    slug: "st-louis",
+    name: "St. Louis",
+    state: "Missouri",
+    stateAbbr: "MO",
+    localCopy:
+      "St. Louis's proud neighborhood identity and strong local business culture mean consumers actively seek out businesses that are embedded in their community — and they use Google reviews to find them.",
+    competitionNote:
+      "St. Louis neighborhood loyalty runs deep — businesses with active Google profiles earn the kind of community trust that fuels long-term growth.",
+  },
+  "pittsburgh": {
+    slug: "pittsburgh",
+    name: "Pittsburgh",
+    state: "Pennsylvania",
+    stateAbbr: "PA",
+    localCopy:
+      "Pittsburgh's renaissance as a tech and healthcare hub has brought a wave of young professionals who make every consumer decision through their smartphone — starting with Google reviews.",
+    competitionNote:
+      "Pittsburgh's blend of old neighborhood loyalty and new professional energy rewards businesses that maintain an active, engaged Google presence.",
+  },
+  "anchorage": {
+    slug: "anchorage",
+    name: "Anchorage",
+    state: "Alaska",
+    stateAbbr: "AK",
+    localCopy:
+      "Anchorage's unique geography and tight-knit community mean most residents rely heavily on Google reviews to navigate the city's business landscape — a strong review profile is essential when geography limits options.",
+    competitionNote:
+      "Anchorage's smaller market means every customer relationship matters more — active review management helps businesses retain the customers they've earned.",
+  },
+  "stockton": {
+    slug: "stockton",
+    name: "Stockton",
+    state: "California",
+    stateAbbr: "CA",
+    localCopy:
+      "Stockton's Central Valley location and diverse, value-conscious community mean local businesses compete on trust and reliability — two qualities that a strong Google review profile communicates more effectively than any ad.",
+    competitionNote:
+      "Stockton's budget-conscious consumers research carefully before spending — businesses with strong, responsive review profiles consistently earn their confidence.",
+  },
+  "cincinnati": {
+    slug: "cincinnati",
+    name: "Cincinnati",
+    state: "Ohio",
+    stateAbbr: "OH",
+    localCopy:
+      "Cincinnati's fierce neighborhood pride and passionate local consumer culture create a review environment where people genuinely care about who they support — and they check Google before committing to any new business.",
+    competitionNote:
+      "Cincinnati's neighborhood loyalty is powerful — businesses with active Google profiles tap into the community pride that drives local purchasing decisions.",
+  },
+  "st-paul": {
+    slug: "st-paul",
+    name: "St. Paul",
+    state: "Minnesota",
+    stateAbbr: "MN",
+    localCopy:
+      "St. Paul's close-knit neighborhoods and civic-minded consumer culture create a Google review environment where engagement matters — customers notice which businesses respond and which don't, and they remember.",
+    competitionNote:
+      "St. Paul residents reward businesses that show up for their community — review responses are one of the most visible ways to demonstrate that commitment.",
+  },
+  "toledo": {
+    slug: "toledo",
+    name: "Toledo",
+    state: "Ohio",
+    stateAbbr: "OH",
+    localCopy:
+      "Toledo's working-class values and community-first consumer culture mean customers gravitate toward businesses that demonstrate accountability — and an active Google review profile is the clearest signal of that.",
+    competitionNote:
+      "Toledo's value-driven consumers use Google reviews to separate trustworthy businesses from those that coast on past reputation.",
+  },
+  "greensboro": {
+    slug: "greensboro",
+    name: "Greensboro",
+    state: "North Carolina",
+    stateAbbr: "NC",
+    localCopy:
+      "Greensboro's growing population and diverse economic base — from education to manufacturing to healthcare — create a consumer market that values local businesses with visible community engagement.",
+    competitionNote:
+      "Greensboro's steady growth brings new residents who rely entirely on Google to find businesses they can trust.",
+  },
+  "newark": {
+    slug: "newark",
+    name: "Newark",
+    state: "New Jersey",
+    stateAbbr: "NJ",
+    localCopy:
+      "Newark's proximity to New York City and rapidly improving reputation have created an emerging business landscape where local businesses compete not just locally, but against Manhattan options miles away — your Google profile is your edge.",
+    competitionNote:
+      "Newark's urban consumers are sophisticated and have options — businesses with strong review profiles stand out in a market where competition is intense.",
+  },
+  "plano": {
+    slug: "plano",
+    name: "Plano",
+    state: "Texas",
+    stateAbbr: "TX",
+    localCopy:
+      "Plano's affluent, tech-forward population and dense suburban commercial landscape mean customers research heavily before choosing — your Google review profile is your primary sales tool before any customer contact.",
+    competitionNote:
+      "Plano's educated consumer base has high expectations and many options — businesses with well-managed Google profiles consistently win the comparison.",
+  },
+  "henderson": {
+    slug: "henderson",
+    name: "Henderson",
+    state: "Nevada",
+    stateAbbr: "NV",
+    localCopy:
+      "Henderson's rapidly growing suburban community and Las Vegas metro proximity create a consumer base that values local alternatives to the Strip experience — your Google profile is how they find you.",
+    competitionNote:
+      "Henderson's fast-growing population of new residents relies heavily on Google to build their local network — a strong review profile puts you at the top of every search.",
+  },
+  "lincoln": {
+    slug: "lincoln",
+    name: "Lincoln",
+    state: "Nebraska",
+    stateAbbr: "NE",
+    localCopy:
+      "Lincoln's university-anchored economy and engaged Midwestern consumer base create a review culture where responsiveness and honesty are valued above flashy marketing — and Google reviews are where those qualities show.",
+    competitionNote:
+      "Lincoln's community-minded consumers support businesses that engage with them — consistent review responses signal that you're invested in the relationship.",
+  },
+  "buffalo": {
+    slug: "buffalo",
+    name: "Buffalo",
+    state: "New York",
+    stateAbbr: "NY",
+    localCopy:
+      "Buffalo's loyal neighborhood culture and passionate local identity mean consumers actively choose local businesses when those businesses demonstrate they care — and review engagement is one of the most visible ways to show it.",
+    competitionNote:
+      "Buffalo's fierce local pride means businesses that engage with their community online build loyal customer bases that weather any economic shift.",
+  },
+  "fort-wayne": {
+    slug: "fort-wayne",
+    name: "Fort Wayne",
+    state: "Indiana",
+    stateAbbr: "IN",
+    localCopy:
+      "Fort Wayne's strong Midwestern business culture and growing metropolitan area create a consumer base that values reliability and personal service — qualities that shine through in a well-managed Google review profile.",
+    competitionNote:
+      "Fort Wayne's growing economy and incoming businesses mean established players need active review profiles to stay ahead of new competition.",
+  },
+  "jersey-city": {
+    slug: "jersey-city",
+    name: "Jersey City",
+    state: "New Jersey",
+    stateAbbr: "NJ",
+    localCopy:
+      "Jersey City's NYC overflow population of young professionals and diverse communities create a highly review-engaged consumer base that makes decisions based on Google ratings before they cross the Hudson — or stay local.",
+    competitionNote:
+      "Jersey City's sophisticated, mobile-first consumers compare options instantly — businesses with strong review profiles win the comparison.",
+  },
+  "chula-vista": {
+    slug: "chula-vista",
+    name: "Chula Vista",
+    state: "California",
+    stateAbbr: "CA",
+    localCopy:
+      "Chula Vista's position as one of California's fastest-growing cities and its vibrant Latino community create a consumer base that values responsive, community-connected businesses — and Google reviews are where that connection is demonstrated.",
+    competitionNote:
+      "Chula Vista's rapid growth means new residents are constantly building their local business networks from scratch, using Google reviews as their primary guide.",
+  },
+  "orlando": {
+    slug: "orlando",
+    name: "Orlando",
+    state: "Florida",
+    stateAbbr: "FL",
+    localCopy:
+      "Orlando's massive tourism economy means your Google review profile is working 24/7 to convert visitors who discover your business on their phones — and to retain the local regulars who keep you afloat between tourist seasons.",
+    competitionNote:
+      "Orlando businesses compete with theme parks and national chains for every customer dollar — a strong local review profile is how independent businesses win.",
+  },
+  "st-petersburg": {
+    slug: "st-petersburg",
+    name: "St. Petersburg",
+    state: "Florida",
+    stateAbbr: "FL",
+    localCopy:
+      "St. Petersburg's thriving arts scene, growing tech sector, and influx of remote workers have created a sophisticated consumer base that values local businesses with authentic personalities — reflected in how they manage their online reputation.",
+    competitionNote:
+      "St. Pete's culture of supporting local businesses is strong — but customers still research Google before making their first visit.",
+  },
+  "norfolk": {
+    slug: "norfolk",
+    name: "Norfolk",
+    state: "Virginia",
+    stateAbbr: "VA",
+    localCopy:
+      "Norfolk's large military community and Hampton Roads regional economy create a high-turnover consumer base — military families rotate in and out constantly, and Google reviews are how they identify businesses they can trust in their new home.",
+    competitionNote:
+      "Norfolk's rotating military population means new customers are always entering the market — businesses with strong review profiles capture them first.",
+  },
+  "chandler": {
+    slug: "chandler",
+    name: "Chandler",
+    state: "Arizona",
+    stateAbbr: "AZ",
+    localCopy:
+      "Chandler's tech corridor and affluent suburban community create a consumer base with high expectations and plenty of options — your Google review profile is the trust signal that tips the decision toward your business.",
+    competitionNote:
+      "Chandler's well-educated, tech-savvy consumers research before spending — a well-managed Google profile is your strongest conversion tool.",
+  },
+  "laredo": {
+    slug: "laredo",
+    name: "Laredo",
+    state: "Texas",
+    stateAbbr: "TX",
+    localCopy:
+      "Laredo's unique position as one of the busiest land ports in the US creates a vibrant cross-border economy where businesses serve both local residents and international commerce — and Google reviews bridge both audiences.",
+    competitionNote:
+      "Laredo's binational market and steady commercial traffic mean businesses with strong Google profiles capture customers from both sides of the border.",
+  },
+  "madison": {
+    slug: "madison",
+    name: "Madison",
+    state: "Wisconsin",
+    stateAbbr: "WI",
+    localCopy:
+      "Madison's university-driven economy, progressive consumer culture, and highly engaged civic community create one of the most review-active mid-size markets in the Midwest — customers here read and write reviews at exceptionally high rates.",
+    competitionNote:
+      "Madison's educated consumer base holds businesses to high standards — and uses Google reviews to identify which ones actually meet them.",
+  },
+  "durham": {
+    slug: "durham",
+    name: "Durham",
+    state: "North Carolina",
+    stateAbbr: "NC",
+    localCopy:
+      "Durham's Research Triangle economy and rapidly growing population of young professionals and academics have created a sophisticated, review-forward consumer culture where Google ratings are a primary factor in every purchasing decision.",
+    competitionNote:
+      "Durham's influx of educated professionals means a consumer base that researches thoroughly — businesses with strong Google profiles consistently win their first visit.",
+  },
+  "lubbock": {
+    slug: "lubbock",
+    name: "Lubbock",
+    state: "Texas",
+    stateAbbr: "TX",
+    localCopy:
+      "Lubbock's university community and West Texas consumer culture create a market that values honest, responsive businesses — and Google reviews are the primary way that trust gets built before the first transaction.",
+    competitionNote:
+      "Lubbock's university-driven population brings a steady stream of new consumers who rely on Google to navigate the city's business landscape.",
+  },
+  "winston-salem": {
+    slug: "winston-salem",
+    name: "Winston-Salem",
+    state: "North Carolina",
+    stateAbbr: "NC",
+    localCopy:
+      "Winston-Salem's creative economy, healthcare sector, and strong university presence create a consumer base that is informed, engaged, and active on Google — businesses that maintain professional review profiles earn sustained loyalty.",
+    competitionNote:
+      "Winston-Salem's growing professional class uses Google reviews to identify the best local options — active profiles win the first visit and keep customers coming back.",
+  },
+  "garland": {
+    slug: "garland",
+    name: "Garland",
+    state: "Texas",
+    stateAbbr: "TX",
+    localCopy:
+      "Garland's position in the DFW metroplex and diverse, multicultural community create a consumer base that relies heavily on Google Maps to navigate their options — your review profile reaches the entire regional market.",
+    competitionNote:
+      "Garland businesses compete across the DFW metro — a strong Google profile extends your reach beyond neighborhood limits.",
+  },
+  "glendale": {
+    slug: "glendale",
+    name: "Glendale",
+    state: "Arizona",
+    stateAbbr: "AZ",
+    localCopy:
+      "Glendale's sports and entertainment hub status means a constant stream of visitors alongside its large residential base — your Google review profile needs to convert both local regulars and first-time visitors searching during Cardinals games and concerts.",
+    competitionNote:
+      "Glendale's combination of sports traffic and suburban residential base means businesses with active Google profiles capture two distinct customer audiences.",
+  },
+  "hialeah": {
+    slug: "hialeah",
+    name: "Hialeah",
+    state: "Florida",
+    stateAbbr: "FL",
+    localCopy:
+      "Hialeah's vibrant Cuban-American community and dense South Florida consumer market create a review culture where authenticity and personal connection matter — businesses that engage with their community through review responses earn enduring loyalty.",
+    competitionNote:
+      "Hialeah's tight-knit community and word-of-mouth culture are amplified by Google reviews — active engagement multiplies your reputation reach.",
+  },
+  "reno": {
+    slug: "reno",
+    name: "Reno",
+    state: "Nevada",
+    stateAbbr: "NV",
+    localCopy:
+      "Reno's transformation from casino town to tech hub has brought an influx of California transplants and young professionals who make consumer decisions through Google — your review profile is how this new demographic discovers you.",
+    competitionNote:
+      "Reno's rapidly changing demographics mean new consumers are entering the market constantly — businesses with strong Google profiles capture them before competitors do.",
+  },
+  "baton-rouge": {
+    slug: "baton-rouge",
+    name: "Baton Rouge",
+    state: "Louisiana",
+    stateAbbr: "LA",
+    localCopy:
+      "Baton Rouge's state capital status, large LSU community, and petrochemical industry create a diverse consumer base that uses Google reviews to navigate a city with strong local pride and equally strong business competition.",
+    competitionNote:
+      "Baton Rouge's mix of students, professionals, and government workers creates high review activity — businesses that engage consistently build multi-demographic customer bases.",
+  },
+  "irvine": {
+    slug: "irvine",
+    name: "Irvine",
+    state: "California",
+    stateAbbr: "CA",
+    localCopy:
+      "Irvine's master-planned community and highly educated, affluent consumer base create one of the most research-intensive consumer markets in Southern California — your Google review profile is scrutinized before any purchase decision.",
+    competitionNote:
+      "Irvine's demanding consumers have high standards and excellent alternatives — businesses with well-managed Google profiles earn their trust and their loyalty.",
+  },
+  "chesapeake": {
+    slug: "chesapeake",
+    name: "Chesapeake",
+    state: "Virginia",
+    stateAbbr: "VA",
+    localCopy:
+      "Chesapeake's suburban Hampton Roads community and steady population growth create a consumer base building local business networks from scratch — Google reviews are their most trusted guide.",
+    competitionNote:
+      "Chesapeake's growth means new residents are constantly discovering local businesses for the first time — strong review profiles make the first impression that lasts.",
+  },
+  "irving": {
+    slug: "irving",
+    name: "Irving",
+    state: "Texas",
+    stateAbbr: "TX",
+    localCopy:
+      "Irving's position in the DFW metroplex and its diverse corporate community — home to major company headquarters — create a consumer base with sophisticated expectations and strong Google review habits.",
+    competitionNote:
+      "Irving's corporate community and DFW location mean businesses compete across a massive regional market — a strong Google profile is how local businesses win against larger competitors.",
+  },
+  "scottsdale": {
+    slug: "scottsdale",
+    name: "Scottsdale",
+    state: "Arizona",
+    stateAbbr: "AZ",
+    localCopy:
+      "Scottsdale's affluent consumer base, luxury business culture, and year-round tourism create an exceptionally review-engaged market where Google ratings directly influence spending decisions across every category.",
+    competitionNote:
+      "Scottsdale's high-expectation consumers and competitive business landscape mean the best-reviewed businesses consistently outperform on revenue, not just reputation.",
+  },
+  "north-las-vegas": {
+    slug: "north-las-vegas",
+    name: "North Las Vegas",
+    state: "Nevada",
+    stateAbbr: "NV",
+    localCopy:
+      "North Las Vegas's growing residential community and proximity to the Strip mean local businesses serve both neighborhood regulars and visitors — your Google review profile captures both audiences simultaneously.",
+    competitionNote:
+      "North Las Vegas's rapid residential growth means a constant stream of new residents building local vendor relationships — businesses with active review profiles win those relationships first.",
+  },
+  "fremont": {
+    slug: "fremont",
+    name: "Fremont",
+    state: "California",
+    stateAbbr: "CA",
+    localCopy:
+      "Fremont's Silicon Valley adjacency and diverse immigrant communities create a highly tech-savvy, review-engaged consumer base that researches every business decision thoroughly before committing.",
+    competitionNote:
+      "Fremont's tech-forward consumers have the tools and habits to research deeply — businesses with strong Google profiles consistently win the comparison.",
+  },
+  "gilbert": {
+    slug: "gilbert",
+    name: "Gilbert",
+    state: "Arizona",
+    stateAbbr: "AZ",
+    localCopy:
+      "Gilbert's family-oriented suburban community and impressive growth rate make it one of Arizona's most active business markets — a strong Google review profile captures the constant wave of new families setting up households in the area.",
+    competitionNote:
+      "Gilbert's growth is consistent and ongoing — businesses with active review profiles are positioned to capture new customers continuously as the community expands.",
+  },
+  "san-bernardino": {
+    slug: "san-bernardino",
+    name: "San Bernardino",
+    state: "California",
+    stateAbbr: "CA",
+    localCopy:
+      "San Bernardino's Inland Empire position, large working-class community, and value-focused consumer culture mean businesses that demonstrate reliability through their review profiles consistently outperform those that don't.",
+    competitionNote:
+      "San Bernardino's value-conscious consumers research before spending — a strong Google review profile demonstrates the reliability that earns their business.",
+  },
 };
 
 export const INDUSTRY_SLUGS = Object.keys(INDUSTRIES);
