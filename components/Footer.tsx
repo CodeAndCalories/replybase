@@ -65,6 +65,7 @@ export default function Footer() {
                 { label: "Pricing", href: "#" },
                 { label: "How it Works", href: "#" },
                 { label: "Help & Setup Guide", href: "/help" },
+                { label: "Compare", href: "/compare" },
               ].map((item) => (
                 <li key={item.label}>
                   <Link
